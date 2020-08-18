@@ -59,12 +59,12 @@
             "fix": {
                 "type": "file-modify",
                 "options": {
-                    "text": "[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)",
+                    "text": "[![New Relic One Catalog Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/New_Relic_One_Catalog_Project.png)](https://opensource.newrelic.com/oss-category/#new-relic-one-catalog-project)",
                     "write_mode": "prepend",
                     "newlines": { "end": 2 }
                 }
             },
-            "policyInfo": "The README of a community plus project should have a community plus header at the start of the README",
+            "policyInfo": "The README of a community plus project should have a NR1 Catalog header at the start of the README. If you already have a NR1 Catalog header and this rule is failing, your header may be out of date",
             "policyUrl": "https://opensource.newrelic.com/oss-category/"
         },
         "readme-contains-security-section": {
