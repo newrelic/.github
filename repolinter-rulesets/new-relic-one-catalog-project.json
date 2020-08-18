@@ -49,10 +49,10 @@
                 "options": {
                     "globsAll": ["README*"],
                     "nocase": true,
-                    "lineCount": 1, 
+                    "lineCount": 1,
                     "patterns": ["\\[\\s*\\!\\[[a-z0-9\\s]+\\]\\(\\s*https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/master\\/src\\/images\\/categories\\/New_Relic_One_Catalog_Project\\.png\\s*\\)\\s*\\]\\(\\s*https:\\/\\/opensource\\.newrelic\\.com\\/oss-category\\/#new-relic-one-catalog-project\\s*\\)"],
                     "human-readable-pattern": "Open source NR1 Catalog header (see https://opensource.newrelic.com/oss-category)",
-                    "flags": "i", 
+                    "flags": "i",
                     "succeed-on-non-existent": false
                 }
             },
@@ -79,7 +79,7 @@
                     "human-readable-content": "a security section"
                 }
             },
-            "policyInfo": "New Relic recommends referencing our open source security policies in the README",
+            "policyInfo": "New Relic recommends referencing our open source security policies in the README, found at https://github.com/newrelic/.github/blob/main/SECURITY.md",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-discuss-topic": {
@@ -161,19 +161,19 @@
                 "type": "json-schema-passes",
                 "options": {
                     "glob": "package.json",
-                    "human-readable-message": "An `eslint` and `eslint-fix` npm script",
+                    "human-readable-message": "An `eslint-check` and `eslint-fix` npm script",
                     "schema": {
                         "properties": {
                             "scripts": {
                                 "type": "object",
-                                "required": ["eslint", "eslint-fix"]
+                                "required": ["eslint-check", "eslint-fix"]
                             }
                         },
                         "required": ["scripts"]
                     }
                 }
             },
-            "policyInfo": "NPM scripts for ESLint (`eslint` and `eslint-fix`) are required to properly integrate with the nerdpack system"
+            "policyInfo": "NPM scripts for ESLint (`eslint-check` and `eslint-fix`) are required to properly integrate with the nerdpack system"
         }
     },
     "formatOptions": {
