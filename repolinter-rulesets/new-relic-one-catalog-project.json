@@ -59,7 +59,7 @@
             "fix": {
                 "type": "file-modify",
                 "options": {
-                    "text": "[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)",
+                    "text": "[![New Relic One Catalog Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/New_Relic_One_Catalog_Project.png)](https://opensource.newrelic.com/oss-category/#new-relic-one-catalog-project)",
                     "write_mode": "prepend",
                     "newlines": { "end": 2 }
                 }
