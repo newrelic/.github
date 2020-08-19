@@ -1,0 +1,29 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - repolinter-rulesets/community-plus.json
+          - repolinter-rulesets/new-relic-one-catalog-project.json
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Run Repolinter Action
+        id: repolinter
+        continue-on-error: true
+        uses: newrelic/repolinter-action@v1
+        with:
+          config_file: ${{ matrix.config }}
+
+      - name: Check Repolinter Action Result
+        env:
+          DID_ERROR: ${{ steps.repolinter.outputs.errored }}
+        shell: bash
+        run: '[ "$DID_ERROR" = "false" ]'
