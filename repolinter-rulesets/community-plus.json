@@ -67,19 +67,19 @@
             "policyInfo": "The README of a community plus project should have a community plus header at the start of the README",
             "policyUrl": "https://opensource.newrelic.com/oss-category/"
         },
-        "readme-contains-security-section": {
+        "readme-contains-link-to-security-policy": {
             "level": "error",
             "rule": {
                 "type": "file-contents",
                 "options": {
                     "globsAll": ["README*"],
                     "fail-on-non-exist": true,
-                    "flags": "mi",
-                    "content": "^#+\\s*security[\\w\\s]*$",
-                    "human-readable-content": "a security section"
+                    "flags": "i",
+                    "content": "https:\\/\\/github\\.com\\/newrelic\\/[^\\/]+\\/security\\/policy",
+                    "human-readable-content": "a link to the security policy for this repository"
                 }
             },
-            "policyInfo": "New Relic recommends referencing our open source security policies in the README",
+            "policyInfo": "New Relic recommends referencing the open source security policy (found under the \"Security\" tab of the repository) in the README. For an example of this, please see the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-discuss-topic": {
@@ -111,21 +111,6 @@
                 }
             },
             "policyInfo": "A THIRD_PARTY_NOTICES.md file must be present to grant attribution to all dependencies being used by this project. For JavaScript projects, you can generate this file using the [oss-cli](https://github.com/newrelic/newrelic-oss-cli)",
-            "policyUrl": "https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view"
-        },
-        "github-actions-workflow-file-exists": {
-            "level": "error",
-            "rule": {
-                "type": "file-existence",
-                "options": {
-                    "globsAny": [
-                        ".github/workflows/*.yml",
-                        ".github/workflows/*.yaml"
-                    ],
-                    "nocase": true
-                }
-            },
-            "policyInfo": "Any Community Plus project must integrate with GitHub actions",
             "policyUrl": "https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view"
         }
     },
