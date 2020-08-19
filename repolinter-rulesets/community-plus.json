@@ -42,7 +42,7 @@
             "policyInfo": "New Relic requires a README file in all projects. This README should give a general overview of the project, and should point to additional resources (security, contributing, etc.) where developers and users can learn further",
             "policyUrl": "https://github.com/newrelic/open-source-tools/tree/master/javascript/oss-template"
         },
-        "readme-starts-with-community-header": {
+        "readme-starts-with-community-plus-header": {
             "level": "error",
             "rule": {
                 "type": "file-starts-with",
