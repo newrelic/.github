@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Run Repolinter Action
+        id: repolinter
         continue-on-error: true
         uses: newrelic/repolinter-action@v1
         with:
