@@ -79,7 +79,7 @@
                     "human-readable-content": "a security section"
                 }
             },
-            "policyInfo": "New Relic recommends referencing our open source security policies in the README, found at https://github.com/newrelic/.github/blob/main/SECURITY.md",
+            "policyInfo": "New Relic recommends having a Security section in your README to address concerns such as vulnerability reporting. This security section should also contain a link to the security policy (found under the \"Security\" tab of the repository). For an example of this section, please see the [NR1 Catalog Template](https://github.com/newrelic/template-nerdpack#security)",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-link-to-security-policy": {
@@ -94,7 +94,7 @@
                     "human-readable-content": "a link to the security policy for this repository"
                 }
             },
-            "policyInfo": "New Relic recommends referencing the open source security policy (found under the \"Security\" tab of the repository) in the README. For an example of this, please see the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)",
+            "policyInfo": "New Relic recommends referencing the open source security policy (found under the \"Security\" tab of the repository) in a Security section in the README. For an example of this, please see the [NR1 Catalog Template](https://github.com/newrelic/template-nerdpack#security)",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-discuss-topic": {
