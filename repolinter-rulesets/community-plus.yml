@@ -1,0 +1,124 @@
+# Schema: https://raw.githubusercontent.com/newrelic-forks/repolinter/master/rulesets/schema.json
+version: 2
+axioms: {}
+rules:
+  license-file-exists:
+    level: error
+    rule:
+      type: file-existence
+      options:
+        globsAny:
+        - LICENSE*
+        - COPYING*
+        nocase: true
+    fix:
+      type: file-create
+      options:
+        file: LICENSE
+        replace: true
+        text:
+          url: https://www.apache.org/licenses/LICENSE-2.0.txt
+    policyInfo: >-
+      New Relic requires that all open source projects have an associated
+      license contained within the project. This license must be permissive (e.g.
+      non-viral or copyleft), and we recommend Apache 2.0 for most use cases
+    policyUrl: https://docs.google.com/document/d/1vML4aY_czsY0URu2yiP3xLAKYufNrKsc7o4kjuegpDw/edit
+  readme-file-exists:
+    level: error
+    rule:
+      type: file-existence
+      options:
+        globsAny:
+        - README*
+        nocase: true
+    fix:
+      type: file-create
+      options:
+        file: README.md
+        text:
+          url: https://raw.githubusercontent.com/newrelic/open-source-tools/master/nerdpacks/oss-template/README.md
+    policyInfo: >-
+      New Relic requires a README file in all projects. This README should
+      give a general overview of the project, and should point to additional resources
+      (security, contributing, etc.) where developers and users can learn further
+    policyUrl: https://github.com/newrelic/open-by-default
+  readme-starts-with-community-plus-header:
+    level: error
+    rule:
+      type: file-starts-with
+      options:
+        globsAll:
+        - README*
+        nocase: true
+        lineCount: 1
+        patterns:
+        - "\\[\\s*\\!\\[[a-z0-9\\s]+\\]\\(\\s*https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/master\\/src\\/images\\/categories\\/Community_Plus\\.png\\s*\\)\\s*\\]\\(\\s*https:\\/\\/opensource\\.newrelic\\.com\\/oss-category\\/#community-plus\\s*\\)"
+        human-readable-pattern: Open source Community Plus header (see https://opensource.newrelic.com/oss-category)
+        flags: i
+        succeed-on-non-existent: false
+    fix:
+      type: file-modify
+      options:
+        text: "[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)"
+        write_mode: prepend
+        newlines:
+          end: 2
+    policyInfo: >-
+      The README of a community plus project should have a community plus
+      header at the start of the README. If you already have a community plus header
+      and this rule is failing, your header may be out of date
+    policyUrl: https://opensource.newrelic.com/oss-category/
+  readme-contains-link-to-security-policy:
+    level: error
+    rule:
+      type: file-contents
+      options:
+        globsAll:
+        - README*
+        fail-on-non-exist: true
+        flags: i
+        content: https:\/\/github\.com\/newrelic\/[^\/]+\/security\/policy
+        human-readable-content: a link to the security policy for this repository
+    policyInfo: >-
+      New Relic recommends putting a link to the open source security policy for your project
+      (`https://github.com/newrelic/<repo-name>/security/policy`)
+      in the README. For an example of this, please see the "a note about vulnerabilities"
+      section of the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)
+    policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
+  readme-contains-discuss-topic:
+    level: error
+    rule:
+      type: file-contents
+      options:
+        globsAll:
+        - README*
+        fail-on-non-exist: true
+        flags: i
+        content: discuss\.newrelic\.com
+        human-readable-content: a link to the appropriate discuss.newrelic.com topic
+    policyInfo: >-
+      New Relic recommends directly linking the your appropriate discuss.newrelic.com
+      topic in the README, allowing developer an alternate method of getting support
+    policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
+  third-party-notices-file-exists:
+    level: error
+    rule:
+      type: file-existence
+      options:
+        globsAny:
+        - THIRD_PARTY_NOTICES*
+        - THIRD-PARTY-NOTICES*
+        - THIRDPARTYNOTICES*
+        nocase: true
+    policyInfo: >-
+      A THIRD_PARTY_NOTICES.md file must be present in your repository to grant attribution
+      to all dependencies being used by this project. For JavaScript projects, you
+      can generate this file using the [oss-cli](https://github.com/newrelic/newrelic-oss-cli)
+    policyUrl: https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view
+formatOptions:
+  disclaimer: >-
+    🤖*This issue was automatically generated by [repolinter-action](https://github.com/newrelic/repolinter-action),
+    developed by the Open Source and Developer Advocacy team at New Relic. This issue
+    will be automatically updated or closed when changes are pushed. If you have any
+    problems with this tool, please feel free to open a GitHub issue or give us a
+    ping in #help-opensource.*

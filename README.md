@@ -6,7 +6,7 @@ Standard policy and procedure across the New Relic GitHub organization.
 
 The following is a high-level overview of the rulesets being enforced by [repolinter-action](https://github.com/newrelic/repolinter-action).
 
-### NR1 Catalog
+### [NR1 Catalog](./repolinter-rulesets/new-relic-one-catalog-project.json)
 
  * `license-file-exists` - Checks that a `LICENSE` or `COPYING` file exists. Does not check for a particular variant of license, it is up to the repository maintainer to ensure the license is correct.
  * `readme-file-exists` - Checks that a `README.md` file exists.
@@ -27,7 +27,7 @@ The following is a high-level overview of the rulesets being enforced by [repoli
  * `nr1-catalog-documentation-file-exists` - Checks that a `catalog/documentation.md` file exists for the NR1 catalog metadata.
  * `package-scripts-present` - Checks that `eslint-fix` and `eslint-check` scripts are present in the `package.json`. These scripts may contain any commands.
 
-### Community Plus
+### [Community Plus](./repolinter-rulesets/community-plus.yml)
 
  * `license-file-exists` - Checks that a `LICENSE` or `COPYING` file exists. Does not check for a particular variant of license, it is up to the repository maintainer to ensure the license is correct.
  * `readme-file-exists` - Checks that a `README.md` file exists.

@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - repolinter-rulesets/community-plus.json
+          - repolinter-rulesets/community-plus.yml
           - repolinter-rulesets/new-relic-one-catalog-project.json
     steps:
       - name: Checkout Repo

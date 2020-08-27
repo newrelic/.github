@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/prototypicalpro/repolinter/master/rulesets/schema.json",
+    "$schema": "https://raw.githubusercontent.com/newrelic-forks/repolinter/master/rulesets/schema.json",
     "version": 2,
     "axioms": {},
     "rules": {
@@ -94,7 +94,7 @@
                     "human-readable-content": "a link to the security policy for this repository"
                 }
             },
-            "policyInfo": "New Relic recommends referencing the open source security policy (found under the \"Security\" tab of the repository) in a Security section in the README. For an example of this, please see the [NR1 Catalog Template](https://github.com/newrelic/template-nerdpack#security)",
+            "policyInfo": "New Relic recommends referencing the open source security policy (`https://github.com/newrelic/<repo-name>/security/policy`) in a Security section in the README. For an example of this, please see the [NR1 Catalog Template](https://github.com/newrelic/template-nerdpack#security)",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-discuss-topic": {
