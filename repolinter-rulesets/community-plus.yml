@@ -101,7 +101,7 @@ rules:
       topic in the README, allowing developer an alternate method of getting support
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
   third-party-notices-file-exists:
-    level: error
+    level: warning
     rule:
       type: file-existence
       options:
@@ -111,9 +111,16 @@ rules:
         - THIRDPARTYNOTICES*
         nocase: true
     policyInfo: >-
-      A THIRD_PARTY_NOTICES.md file must be present in your repository to grant attribution
-      to all dependencies being used by this project. For JavaScript projects, you
-      can generate this file using the [oss-cli](https://github.com/newrelic/newrelic-oss-cli)
+      A [`THIRD_PARTY_NOTICES.md`](https://github.com/newrelic/opensource-website/blob/develop/THIRD_PARTY_NOTICES.md)
+      file can be present in your repository to grant attribution to all dependencies
+      being used by this project. This document is necessary if you are using
+      third-party source code in your project, with the exception of code referenced outside
+      the project's compiled/bundled binary (ex. some Java projects require modules to
+      be pre-installed in the classpath, outside the project binary and therefore
+      outside the scope of the `THIRD_PARTY_NOTICES`). Please
+      review your project's dependencies and create a THIRD_PARTY_NOTICES.md file if
+      necessary. For JavaScript projects, you can generate this file using the 
+      [oss-cli](https://github.com/newrelic/newrelic-oss-cli)
     policyUrl: https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view
 formatOptions:
   disclaimer: >-
