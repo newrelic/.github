@@ -1,3 +1,5 @@
+[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)
+
 # .github
 
 Standard policy and procedure across the New Relic GitHub organization.
@@ -15,7 +17,7 @@ The following is a high-level overview of the rulesets being enforced by [repoli
 [![New Relic One Catalog Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/New_Relic_One_Catalog_Project.png)](https://opensource.newrelic.com/oss-category/#new-relic-one-catalog-project)
 ```
  * `readme-contains-security-section` - Checks that a `## Security` markdown header exists in `README.md`. This check is designed to determine if a security section is present.
- * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy`.
+ * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
  * `readme-contains-discuss-topic` - Checks that a valid link to `discuss.newrelic.com` exists in `README.md`.
  * `third-party-notices-file-exists` - Checks that a `THIRD_PARTY_NOTICES.md` file exists, does not verify that the content is correct. A `THIRD_PARTY_NOTICES.md` file may any have of the following alternate filenames:
    * `THIRD_PARTY_NOTICES*`
@@ -35,7 +37,7 @@ The following is a high-level overview of the rulesets being enforced by [repoli
 ```md
 [![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)
 ```
- * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy`.
+ * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
  * `readme-contains-discuss-topic` - Checks that a valid link to `discuss.newrelic.com` exists in `README.md`.
  * `third-party-notices-file-exists` - Checks that a `THIRD_PARTY_NOTICES.md` file exists, does not verify that the content is correct. A `THIRD_PARTY_NOTICES.md` file may any have of the following alternate filenames:
    * `THIRD_PARTY_NOTICES*`
