@@ -100,6 +100,24 @@ rules:
       New Relic recommends directly linking the your appropriate discuss.newrelic.com
       topic in the README, allowing developer an alternate method of getting support
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
+  code-of-conduct-file-does-not-exist:
+    level: error
+    rule:
+      type: file-not-exists
+      options:
+        globsAll:
+        - CODE_OF_CONDUCT*
+        - CODE-OF-CONDUCT*
+        - CODEOFCODUCT
+        nocase: true
+    fix:
+      type: file-remove
+      options: {}
+    policyInfo: >-
+      New Relic has moved the `CODE_OF_CONDUCT` file to a [centralized location](https://github.com/newrelic/.github/blob/main/CODE_OF_CONDUCT.md)
+      where it is referenced automatically by every repository in the New Relic organization. Because of this change, any other `CODE_OF_CONDUCT` file
+      in a repository is now redundant and should be removed
+    policyUrl: https://docs.google.com/document/d/1vML4aY_czsY0URu2yiP3xLAKYufNrKsc7o4kjuegpDw/edit
   third-party-notices-file-exists:
     level: warning
     rule:
@@ -119,7 +137,7 @@ rules:
       be pre-installed in the classpath, outside the project binary and therefore
       outside the scope of the `THIRD_PARTY_NOTICES`). Please
       review your project's dependencies and create a THIRD_PARTY_NOTICES.md file if
-      necessary. For JavaScript projects, you can generate this file using the 
+      necessary. For JavaScript projects, you can generate this file using the
       [oss-cli](https://github.com/newrelic/newrelic-oss-cli)
     policyUrl: https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view
 formatOptions:
