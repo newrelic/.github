@@ -1,0 +1,37 @@
+name: Apply Repolinter
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '24 21 * * *'
+  workflow_dispatch:
+
+jobs:
+  apply-repolinter:
+    name: Apply Repolinter (${{ matrix.repo }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Edit here to add other repositories
+          - repo: newrelic/newrelic-python-agent
+            config: https://raw.githubusercontent.com/newrelic/.github/main/repolinter-rulesets/community-plus.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ matrix.repo }}
+          token: ${{ secrets.REPOLINTER_TOKEN }}
+      
+      - name: Run Repolinter
+        uses: newrelic/repolinter-action@v1
+        with:
+          config_url: ${{ matrix.config }}
+          output_type: issue
+          username: nr-opensource-bot
+          repository: ${{ matrix.repo }}
+          token: ${{ secrets.REPOLINTER_TOKEN }}
+
+
