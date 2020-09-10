@@ -16,18 +16,26 @@ jobs:
         include:
           # Edit here to add other repositories
           - repo: newrelic/newrelic-python-agent
-            config: https://raw.githubusercontent.com/newrelic/.github/main/repolinter-rulesets/community-plus.yml
+            config: repolinter-rulesets/community-plus.yml
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout Self
         uses: actions/checkout@v2
         with:
+          path: ./repo
+
+      - name: Checkout ${{ matrix.repo }}
+        uses: actions/checkout@v2
+        with:
+          path: ./apply
           repository: ${{ matrix.repo }}
           token: ${{ secrets.REPOLINTER_TOKEN }}
       
       - name: Run Repolinter
         uses: newrelic/repolinter-action@v1
         with:
+          directory: ${{ github.workspace }}/apply
+          config_file: ${{ github.workspace }}/repo/${{ matrix.config }}
           config_url: ${{ matrix.config }}
           output_type: issue
           username: nr-opensource-bot
