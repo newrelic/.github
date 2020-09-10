@@ -118,7 +118,7 @@ rules:
       New Relic has moved the `CODE_OF_CONDUCT` file to a [centralized location](https://github.com/newrelic/.github/blob/main/CODE_OF_CONDUCT.md)
       where it is referenced automatically by every repository in the New Relic organization. Because of this change, any other `CODE_OF_CONDUCT` file
       in a repository is now redundant and should be removed
-    policyUrl: https://docs.google.com/document/d/1vML4aY_czsY0URu2yiP3xLAKYufNrKsc7o4kjuegpDw/edit
+    policyUrl: https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view
   third-party-notices-file-exists:
     level: warning
     rule:
