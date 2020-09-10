@@ -50,9 +50,10 @@ rules:
         globsAll:
         - README*
         nocase: true
-        lineCount: 1
+        lineCount: 5
         patterns:
-        - "\\[\\s*\\!\\[[a-z0-9\\s]+\\]\\(\\s*https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/master\\/src\\/images\\/categories\\/Community_Plus\\.png\\s*\\)\\s*\\]\\(\\s*https:\\/\\/opensource\\.newrelic\\.com\\/oss-category\\/#community-plus\\s*\\)"
+        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/master\/src\/images\/categories\/Community_Plus\.png
+        - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus
         human-readable-pattern: Open source Community Plus header (see https://opensource.newrelic.com/oss-category)
         flags: i
         succeed-on-non-existent: false
