@@ -1,0 +1,9 @@
+{
+  "name": "NR1 Catalog Apps Workflow",
+  "description": "Allows a Nerdpack repo to automagically PR itself to the nr1-catalog",
+  "iconName": "git-pull-request",
+  "categories": [
+    "Continuous integration",
+    "Deployment"
+  ]
+}
