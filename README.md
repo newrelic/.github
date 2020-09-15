@@ -61,5 +61,34 @@ reStructured Text:
    * `THIRD-PARTY-NOTICES*`
    * `THIRDPARTYNOTICES*`
 
+### [Example Code](./repolinter-rulesets/example-code.yml)
+
+ * `license-file-exists` - Checks that a `LICENSE` or `COPYING` file exists. Does not check for a particular variant of license, it is up to the repository maintainer to ensure the license is correct.
+ * `readme-file-exists` - Checks that a `README.md` file exists.
+ * `readme-starts-with-example-code-header` - Checks that the [Example Code header](https://github.com/newrelic/opensource-website/wiki/Open-Source-Category-Snippets#category-example-code) is present in the first line of the `README`. To allow compatibility with both Markdown and reStructured text, this rule only checks the first 5 lines of the `README` for the presence of the image link (`https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Example_Code.png`) and the opensource link (`https://opensource.newrelic.com/oss-category/#example-code`). This header must be the most recent version to pass, and may need to be updated to one of the following:
+
+Markdown:
+```md
+[![Example Code header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Example_Code.png)](https://opensource.newrelic.com/oss-category/#example-code)
+```
+reStructured Text:
+```rst
+|header|
+
+.. |header| image:: https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Example_Code.png
+    :target: https://opensource.newrelic.com/oss-category/#example-code
+```
+ * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
+ * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
+   * `CODE-OF-CONDUCT*`
+   * `CODE_OF_CONDUCT*`
+   * `CODEOFCONDUCT*`
+ * `third-party-notices-file-exists` - Checks that a `THIRD_PARTY_NOTICES.md` file exists, does not verify that the content is correct. A `THIRD_PARTY_NOTICES.md` file may any have of the following alternate filenames:
+   * `THIRD_PARTY_NOTICES*`
+   * `THIRD-PARTY-NOTICES*`
+   * `THIRDPARTYNOTICES*`
+
+
 ## Notes for Ruleset Creation
 * If the rule intends to check the contents of `README.md`, ensure that a [`README.rst`](https://github.com/DevDungeon/reStructuredText-Documentation-Reference) is also supported, as some projects prefer reStructured text to Markdown (ex. [newrelic-python-agent](https://github.com/newrelic/newrelic-python-agent)).
+* Make sure to double check all the links!
