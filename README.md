@@ -119,3 +119,4 @@ reStructured Text:
 ## Notes for Ruleset Creation
 * If the rule intends to check the contents of `README.md`, ensure that a [`README.rst`](https://github.com/DevDungeon/reStructuredText-Documentation-Reference) is also supported, as some projects prefer reStructured text to Markdown (ex. [newrelic-python-agent](https://github.com/newrelic/newrelic-python-agent)).
 * Make sure to double check all the links!
+* Remember to add the ruleset path to the [`test` workflow](./.github/workflows/test.yml).
