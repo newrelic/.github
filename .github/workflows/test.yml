@@ -11,6 +11,8 @@ jobs:
         config:
           - repolinter-rulesets/community-plus.yml
           - repolinter-rulesets/new-relic-one-catalog-project.json
+          - repolinter-rulesets/example-code.yml
+          - repolinter-rulesets/new-relic-experimental.yml
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
