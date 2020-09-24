@@ -105,7 +105,7 @@ reStructured Text:
 .. |header| image:: https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png
     :target: https://opensource.newrelic.com/oss-category/#new-relic-experimental
 ```
- * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
+ * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic-experimental/<repo-name>/security/policy` or `../../security/policy`.
  * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
    * `CODE-OF-CONDUCT*`
    * `CODE_OF_CONDUCT*`
