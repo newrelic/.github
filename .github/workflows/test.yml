@@ -13,6 +13,7 @@ jobs:
           - repolinter-rulesets/new-relic-one-catalog-project.json
           - repolinter-rulesets/example-code.yml
           - repolinter-rulesets/new-relic-experimental.yml
+          - repolinter-rulesets/community-project.yml
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
