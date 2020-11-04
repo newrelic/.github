@@ -42,7 +42,7 @@ rules:
       give a general overview of the project, and should point to additional resources
       (security, contributing, etc.) where developers and users can learn further
     policyUrl: https://github.com/newrelic/open-by-default
-  readme-starts-with-community-plus-header:
+  readme-starts-with-community-header:
     level: error
     rule:
       type: file-starts-with
@@ -65,7 +65,7 @@ rules:
         newlines:
           end: 2
     policyInfo: >-
-      The README of a community plus project should have a community project
+      The README of a community project should have a community project
       header at the start of the README. If you already have a community project header
       and this rule is failing, your header may be out of date, and you should
       update your header with the suggested one below
