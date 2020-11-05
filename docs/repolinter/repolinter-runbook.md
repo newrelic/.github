@@ -93,6 +93,9 @@ Adding Repolinter to many repositories requires opening a large number of identi
      * `cannot create branch feature/repolinter-action, skipping this repository: Error: Request failed with status code 404` - The Personal Access Token does not have permissions to write to this repository. Check that the `public_repo` scope and granted and the user has write permissions to the repository.
      * `cannot create branch feature/repolinter-action, skipping this repository: Error: Request failed with status code 422` - A branch named `feature/repolinter-action` already exists on this repository. Is there already a PR for Repolinter Action open?
      * `GaxiosError: Request failed with status code 401` - Check the Personal Access Token. Is the token pasted correctly? Does it have the permissions needed?
+     * `Config file not found` - Check that you are running the command in `{work}`, and that the `.repo.yml` file is formatted correctly (use www.yamllint.com to check syntax).
+     * `Action returned empty array` - The repolinter workflow file is already present on this repository, did you already apply Repolinter?
+     * `Callback function threw an exception` - Check that the absolute path in the command is correct, and that `{work}/repolinter.yml` is readable by the tool.
 
 ### Change the policy for a repository
 
@@ -143,6 +146,10 @@ All policies are structured according to the [Repolinter documentation](https://
 
 ## Architecture overview
 
+
+
 ### Future improvements
 
 Axioms, automatic fixes
+
+Note: always check the opensource category in the website if you're moving categories
