@@ -9,6 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          # Add policies to test here. Use a path relative to the root of this repository.
           - repolinter-rulesets/community-plus.yml
           - repolinter-rulesets/new-relic-one-catalog-project.json
           - repolinter-rulesets/example-code.yml
