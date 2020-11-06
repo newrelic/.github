@@ -133,6 +133,7 @@ All policies are structured according to the [Repolinter documentation](https://
    * On that note, ensure that `README*` rules support both Markdown and [RST](https://docutils.sourceforge.io/rst.html). [Example of an RST README](https://github.com/newrelic/newrelic-python-agent/blob/main/README.rst).
  * As of writing repolinter action does not support using the language or license axioms.
  * Fill the `policyInfo` field with as much information as you can. It is not only helpful to the person receiving the error but also serves as a reminder for the reason the rule was put in place.
+ * Remember to double check the links!
 
 ### Creating a policy
 
