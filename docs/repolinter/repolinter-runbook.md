@@ -18,6 +18,10 @@ Instructions are provided below to deploy and maintain this system. Additionally
   - [Creating a policy](#creating-a-policy)
   - [Modifying a policy](#modifying-a-policy)
 - [Architecture overview](#architecture-overview)
+  - [Repolinter Preamble](#repolinter-preamble)
+  - [Repolinter Action](#repolinter-action)
+    - [Decentralized method](#decentralized-method)
+    - [Centralized method](#centralized-method)
   - [Future improvements](#future-improvements)
 <!-- endtoc -->
 
@@ -99,6 +103,8 @@ Adding Repolinter to many repositories requires opening a large number of identi
 
 ### Change the policy for a repository
 
+**Note:** If you are changing the policy for repository, make sure any also change the category for that repository in the [Opensource Website](https://github.com/newrelic/opensource-website).
+
 The process to change the Repolinter policy will depend on how Repolinter is deployed on that repository. If there is a `.github/workflows/repolinter.yml` workflow file in the repository, use the steps below. If the repository is listed in this repository's [`.github/workflows/repolinter-apply.yml`](../../.github/workflows/repolinter-apply.yml), use the steps listed under [change policy for a central deployment](#change-policy-for-a-central-deployment). If neither of these conditions are met, Repolinter has not yet been deployed on the repository--follow the steps under [add Repolinter to a single repository](#add-repolinter-to-a-single-repository) to setup Repolinter for the first time.
 
 1. Fork (or create a branch) on the target repository, and clone it locally so you can modify it.
@@ -146,10 +152,37 @@ All policies are structured according to the [Repolinter documentation](https://
 
 ## Architecture overview
 
+### Repolinter Preamble
 
+Repolinter is a maintained by the [TODOGroup](https://todogroup.org/) and was created to "Lint open source repositories for common issues.". When Repolinter was first evaluated for this project, it was missing key functionality that prevented it from being deployment ready: primarily the ability to automatically fix problems it found, but additionally readability issues with the output and configuration. As a result, a large chunk of the work of deploying Repolinter went towards modifications to Repolinter itself. These modifications were made on a [forked version of Repolinter](https://github.com/newrelic-forks/repolinter), and then later [PRed back into the TODOGroup repository](https://github.com/todogroup/repolinter/pull/174) after the first round of Repolinter action deployments went well. Because of this, **Repolinter Action is based on the [newrelic-forks version of Repolinter](https://github.com/newrelic-forks/repolinter)** and not on the TODOGroup repository. This decision stems from the need to deploy changes to Repolinter quickly if a problem occurs. Since we maintain our own fork, we can proceed with relative autonomy—as good open source citizens, however, I encourage you to always attempt to bring changes from our fork into the TODOGroup version and vice versa. (It should be noted that TODOGroup has indicated to me [@prototypicalpro] that they would eventually like to absorb Repolinter Action into their organization, in which case our Repolinter fork would no longer be necessary.)
+
+### Repolinter Action
+
+At NR Repolinter is deployed via [Repolinter Action](https://github.com/newrelic/repolinter-action). Repolinter action is a [GitHub Action](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions) that runs Repolinter with a target policy against a target repository—in other words, Repolinter action packages Repolinter into a module that can be directly invoked in a GitHub Actions CI pipeline. 
+
+There are two methods we created for deploying repolinter action: decentralized and centralized. The decentralized method is preferred, however the centralized method is a suitable alternative for repositories that prefer to not deal with GitHub Actions.
+
+#### Decentralized method
+
+![Diagram showing Repolinter Action deployed to several repositories and pulling a policy from a centralized .github repository](img/architecture-decentral.png)
+
+In the decentralized method, each repository has a GitHub actions workflow file that runs Repolinter action on push to the default branch. By default, the workflow file is configured to open an issue if the policy does not pass, but will not "break the build" in any other manner. This workflow file also specifies a URL to a centralized policy file stored in the [newrelic/.github](https://github.com/newrelic/.github) repository, which is pulled fresh every time Repolinter action is run. There are some consequences of this architecture that are worth pointing out:
+ * Deployment to a large number of repositories is a highly involved task, but does not require write permissions to any of the repositories (assuming a fork PR deployment). In practice this advantage cannot be realized due to limitations of the tooling.
+ * Results aggregation (how many repolinter issues) must be done using GitHub's search API or otherwise.
+ * The developers of the target repository have ownership over the Repolinter workflow file. This was an intentional choice, and the workflow file is meant to be helpful rather than required.
+ * As the policy is centralized but the *policy url* is not, changing the policy contents requires changing the .github repository but changing which policy is being applied to a repository requires changing the workflow file in the repository itself.
+
+#### Centralized method
+
+![Diagram showing Repolinter Action deployed to the .github repository scanning several external repositories](img/architecture-central.png)
+
+In the centralized method, the newrelic/.github repository has a single [repolinter workflow file](../../.github/workflows/repolinter-apply.yml) which uses Repolinter action to apply Repolinter to a list of other external repositories. A policy is specified with each repository in the workflow file. This method was created for repositories that prefer not to have GitHub actions workflows. Some consequences of this method:
+* The `nr-opensource-bot` machine user must have write permissions to every target repository, creating a security issue if the list is large.
+* Both policy content and type changes are performed in the .github repository.
 
 ### Future improvements
 
-Axioms, automatic fixes
-
-Note: always check the opensource category in the website if you're moving categories
+Below is a list of ideas for improvement of this system, in no particular order:
+ * Repolinter has a concept called [axioms](https://github.com/newrelic-forks/repolinter#axioms) which allow a rule in a policy to only run if certain conditions (such as a language or license) are satisfied. This feature could allow for more specific policies to be made in the future, or for merging all of the current policy into one policy with many conditionals.
+ * Repolinter also has the ability to perform automatic fixes based on policy outcomes. It was originally suggested that Repolinter Action open a PR with these fixes—this feature was backlogged in favor of simply opening an issue to prevent the possibility of erroneous PRs causing confusion.
+ * The tool used for the deployment of repolinter action to many repositories ([@google/repo](https://github.com/googleapis/github-repo-automation)) requires write access to all the repositories it is deploying too. This problem could be fixed by adding fork-PR support to the tool.
