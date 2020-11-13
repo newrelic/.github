@@ -17,6 +17,8 @@ jobs:
           # Edit here to add other repositories
           - repo: newrelic/newrelic-python-agent
             config: repolinter-rulesets/community-plus.yml
+          - repo: newrelic/opentelemetry-exporter-python
+            config: repolinter-rulesets/community-plus.yml
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Self
