@@ -106,6 +106,21 @@ rules:
       in a repository is now redundant and should be removed. Note that you will need to adjust any links to the local `CODE_OF_CONDUCT` file in your
       documentation to point to the central file (`README` and `CONTRIBUTING` will probably have links that need updating)
     policyUrl: https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view
+  oss-docs-no-broken-links:
+    level: error
+    rule:
+      type: file-no-broken-links
+      options:
+        globsAll:
+          README*
+          CONTRIBUTING*
+          THIRD_PARTY_NOTICES*
+          THIRDPARTYNOTICES*
+          CHANGELOG*
+          CLA*
+          ROADMAP*
+        nocase: true
+        pass-external-relative-links: true
   third-party-notices-file-exists:
     level: warning
     rule:
