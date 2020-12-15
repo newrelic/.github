@@ -112,13 +112,13 @@ rules:
       type: file-no-broken-links
       options:
         globsAll:
-          README*
-          CONTRIBUTING*
-          THIRD_PARTY_NOTICES*
-          THIRDPARTYNOTICES*
-          CHANGELOG*
-          CLA*
-          ROADMAP*
+          - README*
+          - CONTRIBUTING*
+          - THIRD_PARTY_NOTICES*
+          - THIRDPARTYNOTICES*
+          - CHANGELOG*
+          - CLA*
+          - ROADMAP*
         nocase: true
         pass-external-relative-links: true
   third-party-notices-file-exists:
