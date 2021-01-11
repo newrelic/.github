@@ -1,0 +1,116 @@
+# Schema: https://raw.githubusercontent.com/newrelic-forks/repolinter/master/rulesets/schema.json
+version: 2
+axioms: {}
+rules:
+  nr1-lib-deprecation-dropdown-label:
+    level: error
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(Dropdown)\s[^>]*(label)=*)
+        human-readable-content: deprecated Dropdown label property
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/dropdown
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-accountpicker-onchange:
+    level: warning
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(AccountPicker)\s[^>]*(onChange)=*)
+        human-readable-content: deprecated event handled for AccountPicker onChange
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/account-picker
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-icon-sizetype:
+    level: error
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(Icon)\s[^>]*(sizeType)=*)
+        human-readable-content: deprecated Icon sizeType property
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/icon
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-entity-title-table-row-cell-value-reporting:
+    level: warning
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(EntityTitleTableRowCell)\s[^>]*(value)=*)
+        human-readable-content: is the reporting property of the value object present within this EntityTitleTableRowCell?
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/entity-title-table-row-cell
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-tooltip-classname:
+    level: error
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(Tooltip)\s[^>]*(className)=*)
+        human-readable-content: deprecated Tooltip className property
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/tooltip
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-tooltip-style:
+    level: error
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(Tooltip)\s[^>]*(style)=*)
+        human-readable-content: deprecated Tooltip style property
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/tooltip
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
+  nr1-lib-deprecation-tablerow-actions-icontype:
+    level: warning
+    rule:
+      type: file-not-contents
+      nocase: true
+      options:
+        globsAll:
+        - "**/*.@(js|ts|jsx|tsx)"
+        fail-on-non-exist: false
+        flags: gm
+        content: (<(TableRow)\s[^>]*(actions)=*)
+        human-readable-content: is the iconType property of the actions object present within this TableRow?
+    policyInfo: >-
+      See the New Relic Developer docs for current API details
+      https://developer.newrelic.com/components/table-row
+    policyUrl: https://github.com/newrelic/developer-website/issues/1033
