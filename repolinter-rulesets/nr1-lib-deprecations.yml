@@ -10,6 +10,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(Dropdown)\s[^>]*(label)=*)
@@ -26,6 +27,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(AccountPicker)\s[^>]*(onChange)=*)
@@ -42,6 +44,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(Icon)\s[^>]*(sizeType)=*)
@@ -58,6 +61,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(EntityTitleTableRowCell)\s[^>]*(value)=*)
@@ -74,6 +78,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(Tooltip)\s[^>]*(className)=*)
@@ -90,6 +95,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(Tooltip)\s[^>]*(style)=*)
@@ -106,6 +112,7 @@ rules:
       options:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(TableRow)\s[^>]*(actions)=*)
