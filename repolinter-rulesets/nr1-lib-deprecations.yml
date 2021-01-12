@@ -48,7 +48,7 @@ rules:
         fail-on-non-exist: false
         flags: gm
         content: (<(Icon)\s[^>]*(sizeType)=*)
-        human-readable-content: deprecated Icon sizeType property
+        human-readable-content: The Icon sizeType property is deprecated
     policyInfo: >-
       See the New Relic Developer docs for current API details
       https://developer.newrelic.com/components/icon
