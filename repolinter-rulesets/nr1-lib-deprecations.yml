@@ -11,6 +11,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
+        - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
         content: (<(Dropdown)\s[^>]*(label)=*)
@@ -65,7 +66,7 @@ rules:
         fail-on-non-exist: false
         flags: gm
         content: (<(EntityTitleTableRowCell)\s[^>]*(value)=*)
-        human-readable-content: is the reporting property of the value object present within this EntityTitleTableRowCell?
+        human-readable-content: The reporting property of the value object should be present within this EntityTitleTableRowCell
     policyInfo: >-
       See the New Relic Developer docs for current API details
       https://developer.newrelic.com/components/entity-title-table-row-cell
@@ -99,7 +100,7 @@ rules:
         fail-on-non-exist: false
         flags: gm
         content: (<(Tooltip)\s[^>]*(style)=*)
-        human-readable-content: deprecated Tooltip style property
+        human-readable-content: The Tooltip style property is deprecated
     policyInfo: >-
       See the New Relic Developer docs for current API details
       https://developer.newrelic.com/components/tooltip
@@ -116,7 +117,7 @@ rules:
         fail-on-non-exist: false
         flags: gm
         content: (<(TableRow)\s[^>]*(actions)=*)
-        human-readable-content: is the iconType property of the actions object present within this TableRow?
+        human-readable-content: The iconType property of the actions object should not be present within a TableRow
     policyInfo: >-
       See the New Relic Developer docs for current API details
       https://developer.newrelic.com/components/table-row
