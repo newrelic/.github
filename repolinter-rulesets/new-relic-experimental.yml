@@ -87,7 +87,7 @@ rules:
       in the README. For an example of this, please see the "a note about vulnerabilities"
       section of the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
-  code-of-conduct-file-does-not-exist:
+  code-of-conduct-should-not-exist-here:
     level: error
     rule:
       type: file-not-exists

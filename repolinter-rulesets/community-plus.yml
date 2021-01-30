@@ -102,7 +102,7 @@ rules:
       New Relic recommends directly linking the your appropriate discuss.newrelic.com
       topic in the README, allowing developer an alternate method of getting support
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
-  code-of-conduct-file-does-not-exist:
+  code-of-conduct-should-not-exist-here:
     level: error
     rule:
       type: file-not-exists

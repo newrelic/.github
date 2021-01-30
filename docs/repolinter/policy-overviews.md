@@ -13,7 +13,7 @@ The following is a high-level overview of the rulesets being enforced by [repoli
  * `readme-contains-security-section` - Checks that a `## Security` markdown header exists in `README.md`. This check is designed to determine if a security section is present.
  * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
  * `readme-contains-discuss-topic` - Checks that a valid link to `discuss.newrelic.com` exists in `README.md`.
- * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
+ * `code-of-conduct-should-not-exist-here` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
    * `CODE-OF-CONDUCT*`
    * `CODE_OF_CONDUCT*`
    * `CODEOFCONDUCT*`
@@ -46,7 +46,7 @@ reStructured Text:
 ```
  * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
  * `readme-contains-discuss-topic` - Checks that a valid link to `discuss.newrelic.com` exists in `README.md`.
- * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
+ * `code-of-conduct-should-not-exist-here` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
    * `CODE-OF-CONDUCT*`
    * `CODE_OF_CONDUCT*`
    * `CODEOFCONDUCT*`
@@ -73,7 +73,7 @@ reStructured Text:
     :target: https://opensource.newrelic.com/oss-category/#example-code
 ```
  * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`.
- * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
+ * `code-of-conduct-should-not-exist-here` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
    * `CODE-OF-CONDUCT*`
    * `CODE_OF_CONDUCT*`
    * `CODEOFCONDUCT*`
@@ -100,7 +100,7 @@ reStructured Text:
     :target: https://opensource.newrelic.com/oss-category/#new-relic-experimental
 ```
  * `readme-contains-link-to-security-policy` - Checks that a link to the security policy is present in `README.md`. The security policy can be found under `https://github.com/newrelic-experimental/<repo-name>/security/policy` or `../../security/policy`.
- * `code-of-conduct-file-does-not-exist` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
+ * `code-of-conduct-should-not-exist-here` - Checks that a code of conduct file is not present in the repository. This file can match any of the following patterns:
    * `CODE-OF-CONDUCT*`
    * `CODE_OF_CONDUCT*`
    * `CODEOFCONDUCT*`
