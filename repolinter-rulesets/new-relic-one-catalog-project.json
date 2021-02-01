@@ -128,7 +128,7 @@
             "policyInfo": "A THIRD_PARTY_NOTICES.md file must be present to grant attribution to all dependencies being used by this project. For JavaScript projects, you can generate this file using the [oss-cli](https://github.com/newrelic/newrelic-oss-cli)",
             "policyUrl": "https://docs.google.com/document/d/1y644Pwi82kasNP5VPVjDV8rsmkBKclQVHFkz8pwRUtE/view"
         },
-        "code-of-conduct-file-does-not-exist": {
+        "code-of-conduct-should-not-exist-here": {
             "level": "error",
             "rule": {
                "type": "file-not-exists",
