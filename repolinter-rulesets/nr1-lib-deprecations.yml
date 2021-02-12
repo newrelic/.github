@@ -13,7 +13,7 @@ rules:
         - "!node_modules/**"
         fail-on-non-exist: false
         flags: gm
-        content: (<(Dropdown)\s[^>]*(label)=*)
+        content: (import {).*(Dropdown).*(} from 'nr1').*(<(Dropdown)\s[^>]*(label)=*)
         human-readable-content: The Dropdown label property is deprecated
     policyInfo: >-
       See the New Relic Developer docs for current API details
