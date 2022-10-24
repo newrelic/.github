@@ -8,6 +8,7 @@ Standard policy and procedure across the New Relic GitHub organization.
  * [Code of Conduct](./CODE_OF_CONDUCT.md)
  * [Security Policy](./SECURITY.md)
  * [License](./LICENSE)
+ * [Maintainers List](./MAINTAINERS.md)
  * [Workflow Templates](./workflow-templates)
  * [Repolinter Runbook](./docs/repolinter/repolinter-runbook.md)
  * [Repolinter Rulesets](./repolinter-rulesets)
