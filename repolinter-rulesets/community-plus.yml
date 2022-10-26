@@ -52,7 +52,7 @@ rules:
         nocase: true
         lineCount: 5
         patterns:
-        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/master\/src\/images\/categories\/Community_Plus\.png
+        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Plus\.png
         - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus
         human-readable-pattern: Open source Community Plus header (see https://opensource.newrelic.com/oss-category)
         flags: i
@@ -60,7 +60,7 @@ rules:
     fix:
       type: file-modify
       options:
-        text: "[![Community Plus header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)"
+        text: "[![Community Plus header](https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png)](https://opensource.newrelic.com/oss-category/#community-plus)"
         write_mode: prepend
         newlines:
           end: 2

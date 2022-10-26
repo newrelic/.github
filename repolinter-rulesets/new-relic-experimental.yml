@@ -52,7 +52,7 @@ rules:
         nocase: true
         lineCount: 5
         patterns:
-        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/master\/src\/images\/categories\/Experimental\.png
+        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Experimental\.png
         - https:\/\/opensource\.newrelic\.com\/oss-category\/#new-relic-experimental
         human-readable-pattern: Open source experimental header (see https://opensource.newrelic.com/oss-category)
         flags: i
@@ -60,7 +60,7 @@ rules:
     fix:
       type: file-modify
       options:
-        text: "[![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)"
+        text: "[![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)"
         write_mode: prepend
         newlines:
           end: 2
