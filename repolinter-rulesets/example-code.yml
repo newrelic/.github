@@ -52,7 +52,7 @@ rules:
         nocase: true
         lineCount: 5
         patterns:
-        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/master\/src\/images\/categories\/Example_Code\.png
+        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Example_Code\.png
         - https:\/\/opensource\.newrelic\.com\/oss-category\/#example-code
         human-readable-pattern: Open source Example Code header (see https://opensource.newrelic.com/oss-category)
         flags: i
@@ -60,7 +60,7 @@ rules:
     fix:
       type: file-modify
       options:
-        text: "[![Example Code header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Example_Code.png)](https://opensource.newrelic.com/oss-category/#example-code)"
+        text: "[![Example Code header](https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Example_Code.png)](https://opensource.newrelic.com/oss-category/#example-code)"
         write_mode: prepend
         newlines:
           end: 2
