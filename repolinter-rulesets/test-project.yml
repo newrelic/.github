@@ -8,8 +8,8 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - LICENSE*
-        - COPYING*
+          - LICENSE*
+          - COPYING*
         nocase: true
     fix:
       type: file-create
@@ -29,7 +29,7 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - README*
+          - README*
         nocase: true
     fix:
       type: file-create
@@ -48,12 +48,12 @@ rules:
       type: file-starts-with
       options:
         globsAll:
-        - README*
+          - README*
         nocase: true
         lineCount: 5
         patterns:
-        - https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Project\.png
-        - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-project
+          - '<a href="https:\/\/opensource\.newrelic\.com\/oss-category\/#community-project\"><picture><source media="\(prefers-color-scheme: dark\)" srcset="https:\/\/raw\.githubusercontent\.com\/newrelic\/open-source-office\/main\/examples\/categories\/images\/dark\/Community_Project\.png"><source media="\(prefers-color-scheme: light\)" srcset="https:\/\/raw\.githubusercontent\.com\/newrelic\/open-source-office\/main\/examples\/categories\/images\/Community_Project\.png"><img alt="New Relic Open Source experimental project banner\. This code solves an interesting problem but does not yet have an active maintainer\(s\)\. The project is being developed in the open for the purpose of feedback on a new feature or function\." src="https:\/\/raw\.githubusercontent\.com\/newrelic\/open-source-office\/main\/examples\/categories\/images\/Community_Project\.png"><\/picture><\/a>'
+          - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-project
         human-readable-pattern: Open source Community header (see https://opensource.newrelic.com/oss-category)
         flags: i
         succeed-on-non-existent: false
@@ -76,7 +76,7 @@ rules:
       type: file-contents
       options:
         globsAll:
-        - README*
+          - README*
         fail-on-non-exist: true
         flags: i
         content: (?:(?:https:\/\/github\.com\/newrelic\/[^\/]+)|(?:\.\.\/\.\.))\/security\/policy
@@ -93,7 +93,7 @@ rules:
       type: file-contents
       options:
         globsAll:
-        - README*
+          - README*
         fail-on-non-exist: true
         flags: i
         content: discuss\.newrelic\.com
@@ -108,9 +108,9 @@ rules:
       type: file-not-exists
       options:
         globsAll:
-        - CODE_OF_CONDUCT*
-        - CODE-OF-CONDUCT*
-        - CODEOFCODUCT
+          - CODE_OF_CONDUCT*
+          - CODE-OF-CONDUCT*
+          - CODEOFCODUCT
         nocase: true
     fix:
       type: file-remove
@@ -127,9 +127,9 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - THIRD_PARTY_NOTICES*
-        - THIRD-PARTY-NOTICES*
-        - THIRDPARTYNOTICES*
+          - THIRD_PARTY_NOTICES*
+          - THIRD-PARTY-NOTICES*
+          - THIRDPARTYNOTICES*
         nocase: true
     policyInfo: >-
       A [`THIRD_PARTY_NOTICES.md`](https://github.com/newrelic/opensource-website/blob/develop/THIRD_PARTY_NOTICES.md)
