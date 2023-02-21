@@ -11,7 +11,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (import {).*(Dropdown).*(} from 'nr1').*(<(Dropdown)\s[^>]*(label)=*)
         human-readable-content: The Dropdown label property is deprecated
@@ -28,7 +28,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(AccountPicker)\s[^>]*(onChange)=*)
         human-readable-content: deprecated event handled for AccountPicker onChange
@@ -45,7 +45,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(Icon)\s[^>]*(sizeType)=*)
         human-readable-content: The Icon sizeType property is deprecated
@@ -62,7 +62,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(EntityTitleTableRowCell)\s[^>]*(value)=*)
         human-readable-content: The reporting property of the value object should be present within this EntityTitleTableRowCell
@@ -79,7 +79,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(Tooltip)\s[^>]*(className)=*)
         human-readable-content: deprecated Tooltip className property
@@ -96,7 +96,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(Tooltip)\s[^>]*(style)=*)
         human-readable-content: The Tooltip style property is deprecated
@@ -113,7 +113,7 @@ rules:
         globsAll:
         - "**/*.@(js|ts|jsx|tsx)"
         - "!node_modules/**"
-        fail-on-non-exist: false
+        fail-on-non-existent: false
         flags: gm
         content: (<(TableRow)\s[^>]*(actions)=*)
         human-readable-content: The iconType property of the actions object should not be present within a TableRow
