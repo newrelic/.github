@@ -77,7 +77,7 @@ rules:
       options:
         globsAll:
         - README*
-        fail-on-non-exist: true
+        fail-on-non-existent: true
         flags: i
         content: (?:(?:https:\/\/github\.com\/newrelic-experimental\/[^\/]+)|(?:\.\.\/\.\.))\/security\/policy
         human-readable-content: a link to the security policy for this repository

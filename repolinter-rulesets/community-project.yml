@@ -77,7 +77,7 @@ rules:
       options:
         globsAll:
         - README*
-        fail-on-non-exist: true
+        fail-on-non-existent: true
         flags: i
         content: (?:(?:https:\/\/github\.com\/newrelic\/[^\/]+)|(?:\.\.\/\.\.))\/security\/policy
         human-readable-content: a link to the security policy for this repository
@@ -94,7 +94,7 @@ rules:
       options:
         globsAll:
         - README*
-        fail-on-non-exist: true
+        fail-on-non-existent: true
         flags: i
         content: discuss\.newrelic\.com
         human-readable-content: a link to the appropriate discuss.newrelic.com topic
