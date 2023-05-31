@@ -8,8 +8,8 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - LICENSE*
-        - COPYING*
+          - LICENSE*
+          - COPYING*
         nocase: true
     fix:
       type: file-create
@@ -29,7 +29,7 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - README*
+          - README*
         nocase: true
     fix:
       type: file-create
@@ -48,12 +48,12 @@ rules:
       type: file-starts-with
       options:
         globsAll:
-        - README*
+          - README*
         nocase: true
         lineCount: 5
         patterns:
-        - '<a href="https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus"><picture><source media="\(prefers-color-scheme: dark\)" srcset="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/dark\/Community_Plus\.png"><source media="\(prefers-color-scheme: light\)" srcset="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Plus\.png"><img alt="New Relic Open Source community plus project banner\." src="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Plus\.png"><\/picture><\/a>'
-        - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus
+          - '<a href="https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus"><picture><source media="\(prefers-color-scheme: dark\)" srcset="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/dark\/Community_Plus\.png"><source media="\(prefers-color-scheme: light\)" srcset="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Plus\.png"><img alt="New Relic Open Source community plus project banner\." src="https:\/\/github\.com\/newrelic\/opensource-website\/raw\/main\/src\/images\/categories\/Community_Plus\.png"><\/picture><\/a>'
+          - https:\/\/opensource\.newrelic\.com\/oss-category\/#community-plus
         human-readable-pattern: Open source Community Plus header (see https://opensource.newrelic.com/oss-category)
         flags: i
         succeed-on-non-existent: false
@@ -76,7 +76,7 @@ rules:
       type: file-contents
       options:
         globsAll:
-        - README*
+          - README*
         fail-on-non-existent: true
         flags: i
         content: (?:(?:https:\/\/github\.com\/newrelic\/[^\/]+)|(?:\.\.\/\.\.))\/security\/policy
@@ -87,19 +87,19 @@ rules:
       in the README. For an example of this, please see the "a note about vulnerabilities"
       section of the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
-  readme-contains-discuss-topic:
+  readme-contains-forum-topic:
     level: error
     rule:
       type: file-contents
       options:
         globsAll:
-        - README*
+          - README*
         fail-on-non-existent: true
         flags: i
-        content: discuss\.newrelic\.com
-        human-readable-content: a link to the appropriate discuss.newrelic.com topic
+        content: forum\.newrelic\.com
+        human-readable-content: a link to the appropriate forum.newrelic.com topic
     policyInfo: >-
-      New Relic recommends directly linking the your appropriate discuss.newrelic.com
+      New Relic recommends directly linking the your appropriate forum.newrelic.com
       topic in the README, allowing developer an alternate method of getting support
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
   code-of-conduct-should-not-exist-here:
@@ -108,9 +108,9 @@ rules:
       type: file-not-exists
       options:
         globsAll:
-        - CODE_OF_CONDUCT*
-        - CODE-OF-CONDUCT*
-        - CODEOFCODUCT
+          - CODE_OF_CONDUCT*
+          - CODE-OF-CONDUCT*
+          - CODEOFCODUCT
         nocase: true
     fix:
       type: file-remove
@@ -127,9 +127,9 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - THIRD_PARTY_NOTICES*
-        - THIRD-PARTY-NOTICES*
-        - THIRDPARTYNOTICES*
+          - THIRD_PARTY_NOTICES*
+          - THIRD-PARTY-NOTICES*
+          - THIRDPARTYNOTICES*
         nocase: true
     policyInfo: >-
       A [`THIRD_PARTY_NOTICES.md`](https://github.com/newrelic/opensource-website/blob/develop/THIRD_PARTY_NOTICES.md)
