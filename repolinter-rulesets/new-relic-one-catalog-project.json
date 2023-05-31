@@ -97,7 +97,7 @@
             "policyInfo": "New Relic recommends referencing the open source security policy (`https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`) in a Security section in the README. For an example of this, please see the [NR1 Catalog Template](https://github.com/newrelic/template-nerdpack#security)",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
-        "readme-contains-discuss-topic": {
+        "readme-contains-forum-topic": {
             "level": "error",
             "rule": {
                 "type": "file-contents",
@@ -105,11 +105,11 @@
                     "globsAll": ["README*"],
                     "fail-on-non-existent": true,
                     "flags": "i",
-                    "content": "discuss\\.newrelic\\.com",
-                    "human-readable-content": "a link to the appropriate discuss.newrelic.com topic"
+                    "content": "forum\\.newrelic\\.com",
+                    "human-readable-content": "a link to the appropriate forum.newrelic.com topic"
                 }
             },
-            "policyInfo": "New Relic recommends directly linking the your appropriate discuss.newrelic.com topic in the README, allowing developer an alternate method of getting support",
+            "policyInfo": "New Relic recommends directly linking the your appropriate forum.newrelic.com topic in the README, allowing developer an alternate method of getting support",
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "third-party-notices-file-exists": {
