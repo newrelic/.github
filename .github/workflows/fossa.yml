@@ -19,8 +19,10 @@ jobs:
       - name: Run fossa 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-          if [[ $(fossa list-targets --format=text) ]]; then
-            fossa analyze 
+          output="$(fossa list-targets --format=text)"
+          if [[ -n $output ]]
+          then
+              printf -- "%s\n" "$output"
           else
-            exit 0
+              printf -- "Fossa did not find any analysis targets.\n"
           fi
