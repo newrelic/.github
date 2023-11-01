@@ -24,6 +24,7 @@ jobs:
           if [[ -n $output ]]
           then
               printf -- "%s\n" "$output"
+              fossa analyze
           else
               printf -- "Fossa did not find any analysis targets.\n"
           fi
