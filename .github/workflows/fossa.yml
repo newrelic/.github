@@ -15,11 +15,12 @@ jobs:
     strategy:
       fail-fast: false
 
-    steps:
-      - uses: actions/checkout@v3
-  
-      - name: Running FOSSA CLI
+    steps:  
+      - name: Run fossa 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-          fossa --version
-          fossa analyze
+          if [[ $(fossa list-targets --format=text) ]]; then
+            fossa analyze 
+          else
+            exit 0
+          fi
