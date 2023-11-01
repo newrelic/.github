@@ -16,6 +16,7 @@ jobs:
       fail-fast: false
 
     steps:  
+      - uses: actions/checkout@v3
       - name: Run fossa 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
