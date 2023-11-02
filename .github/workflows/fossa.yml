@@ -34,4 +34,4 @@ jobs:
                 https://api.github.com/orgs/${{ github.repository_owner }}/properties/values \
                 -d '{"repository_names":[${{ github.repository }}],"properties":[{"property_name":"zeroFossaTargets","value":"True"}]}'
               printf -- "Fossa did not find any analysis targets.\n"
-         fi
+          fi
