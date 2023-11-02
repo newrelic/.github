@@ -8,6 +8,7 @@ on:
 
 jobs:
   fossa:
+    permissions: write-all
     runs-on: ubuntu-latest
     env:
       FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
