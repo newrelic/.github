@@ -23,10 +23,13 @@ jobs:
       - name: Run fossa 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-          output="$(fossa list-targets --format=text)"
-          if [[ -n $output ]]
+          list_targets_output = "$(fossa list-targets 2>&1)" 
+          printf -- "%s\n" "$list_targets_output"
+
+          if [[ echo $list_targets_output | grep 'Error' ]]
           then
-              printf -- "%s\n" "$output"
+              export HAS_FOSSA_TARGETS="Error"
+          elif [[ echo $list_targets_output | grep 'Found target' ]]
               fossa analyze
               export HAS_FOSSA_TARGETS="True"
           else
