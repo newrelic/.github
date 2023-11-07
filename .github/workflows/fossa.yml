@@ -52,7 +52,7 @@ jobs:
         name: Run fossa analyze
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: |
-          fossa_analyze_output=$(fossa analyze 2>&1) 
+          fossa_analyze_output=$(fossa analyze --policy='New Relic Public Github' 2>&1) 
           echo "::notice::$fossa_analyze_output"
           
           if [[ $(echo $fossa_analyze_output | grep "Error" | wc -l) -gt 0 ]]
