@@ -24,19 +24,17 @@ jobs:
         name: Run fossa list-targets 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
+          echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
           list_targets_output=$(set -e; fossa list-targets 2>&1) 
-          printf -- "%s\n" "$list_targets_output"
           
-          if [[ $(echo $list_targets_output | grep "Error" | wc -l) -gt 0 ]]
+          if [[ $(echo $list_targets_output | grep "Found target" | wc -l) -gt 0 ]]
           then
-              "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
-          elif [[ $(echo $list_targets_output | grep "Found target" | wc -l) -gt 0 ]]
-          then
-              fossa analyze
-              "HAS_FOSSA_TARGETS=True" >> "$GITHUB_OUTPUT"
+              echo "::notice::Fossa found analysis targets."
+              echo "::notice::$list_targets_output"
+              echo "HAS_FOSSA_TARGETS=True" >> "$GITHUB_OUTPUT"
           else
-              printf -- "Fossa did not find any analysis targets.\n"
-              "HAS_FOSSA_TARGETS=False" >> "$GITHUB_OUTPUT"
+              echo "::warning::Fossa did not find any analysis targets."
+              echo "HAS_FOSSA_TARGETS=False" >> "$GITHUB_OUTPUT"
           fi
       - name: Set hasFossaTargets custom property
         run: |
@@ -47,9 +45,6 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/orgs/$ORG/properties/values \
             -d '{"repository_names":["'"${REPO##*/}"'"],"properties":[{"property_name":"hasFossaTargets","value":"'"${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS }}"'"}]}'
-      - name: Fail if fossa list-targets had an error
-        if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'Error'}}
-        run: exit 1
       - name: Run fossa analyze
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: fossa analyze
