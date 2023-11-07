@@ -25,7 +25,7 @@ jobs:
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
           echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
-          list_targets_output=$(set -e; fossa list-targets 2>&1) 
+          list_targets_output=$(fossa list-targets 2>&1) 
           
           if [[ $(echo $list_targets_output | grep "Found target" | wc -l) -gt 0 ]]
           then
