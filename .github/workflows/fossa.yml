@@ -33,6 +33,7 @@ jobs:
               echo "::notice::$list_targets_output"
               echo "HAS_FOSSA_TARGETS=True" >> "$GITHUB_OUTPUT"
           else
+              echo "::notice::$list_targets_output"
               echo "::warning::Fossa did not find any analysis targets."
               echo "HAS_FOSSA_TARGETS=False" >> "$GITHUB_OUTPUT"
           fi
