@@ -52,4 +52,7 @@ jobs:
       - name: Run fossa analyze
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: fossa analyze
+      - name: Exit 
+        if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'Error'}}
+        run: exit 1
 
