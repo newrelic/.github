@@ -24,10 +24,13 @@ jobs:
         name: Run fossa list-targets 
         run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-          echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
           list_targets_output=$(fossa list-targets 2>&1) 
-          
-          if [[ $(echo $list_targets_output | grep "Found target" | wc -l) -gt 0 ]]
+
+          if [[ $(echo $list_targets_output | grep "Error" | wc -l) -gt 0 ]]
+          then
+              echo "::error::Fossa list-targets ran with errors."
+              echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
+          elif [[ $(echo $list_targets_output | grep "Found target" | wc -l) -gt 0 ]]
           then
               echo "::notice::Fossa found analysis targets."
               echo "::notice::$list_targets_output"
