@@ -52,7 +52,6 @@ jobs:
         name: Run fossa analyze
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: |
-          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
           fossa_analyze_output=$(fossa analyze 2>&1) 
           echo "::notice::$fossa_analyze_output"
           
@@ -62,6 +61,7 @@ jobs:
               echo "FOSSA_ANALYZE_RESULT=Error" >> "$GITHUB_OUTPUT"
           else
               echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_OUTPUT"
+          fi
       - name: Set fossaAnalyzeResult custom property
         run: |
           curl -L \
