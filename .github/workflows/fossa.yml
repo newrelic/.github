@@ -56,14 +56,16 @@ jobs:
         name: Run fossa analyze
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: |
-          fossa_analyze_output=$(fossa analyze --policy='New Relic Public Github' 2>&1) 
-          echo "::notice::$fossa_analyze_output"
-          
-          if [[ $(echo $fossa_analyze_output | grep "Error" | wc -l) -gt 0 ]]
+          export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
+          export ANALZYE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
+          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALZYE_ERR_FILE
+          if [[ $(grep -i "error" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
           then
               echo "::error::fossa analyze ran with errors."
+              cat $ANALYZE_ERR_FILE
               echo "FOSSA_ANALYZE_RESULT=Error" >> "$GITHUB_OUTPUT"
           else
+              cat $ANALYZE_OUT_FILE
               echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_OUTPUT"
           fi
       - name: Set fossaAnalyzeResult custom property
