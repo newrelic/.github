@@ -33,7 +33,7 @@ jobs:
           then
               echo "::error::fossa list-targets ran with errors."
               cat $LIST_TARGETS_ERR_FILE
-              echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT
+              echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_OUTPUT"
           elif [[ $(cat $LIST_TARGETS_OUT_FILE | wc -l) -gt 0 ]]
           then
               echo "::notice::Fossa found analysis targets."
