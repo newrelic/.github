@@ -20,6 +20,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Download newrelic.jar
+        if: ${{ github.repository == 'newrelic-java-examples' }}
+        run: |
+          mkdir newrelic-java-agent/scala/segment-api-synchronous/libs
+          curl https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.jar --output newrelic-java-agent/scala/segment-api-synchronous/libs/newrelic.jar
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
