@@ -21,13 +21,8 @@ jobs:
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
-      - name: Checkout newrelic/newrelic-java-agent
-        uses: actions/checkout@v4
-        with:
-          repository: newrelic/newrelic-java-agent
-          path: newrelic-java-agent
-      - name: Setup java agent environment
-        uses: ./.github/actions/setup-environment
+      - name: Run the specified Setup Build Action
+        uses: ${{ vars.SETUP_BUILD_ACTION_PATH }}
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
