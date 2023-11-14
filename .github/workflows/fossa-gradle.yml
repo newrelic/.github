@@ -22,7 +22,7 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v4
       - name: Run the specified Setup Build Action
-        uses: ${{ vars.SETUP_BUILD_ACTION_PATH }}
+        uses: ./.github/actions/setup-environment
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
