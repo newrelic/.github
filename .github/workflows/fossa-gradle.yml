@@ -27,7 +27,7 @@ jobs:
           repository: newrelic/newrelic-java-agent
           path: newrelic-java-agent
       - name: Setup java agent environment
-        uses: .github/actions/setup-environment/action.yml
+        uses: .github/actions/setup-environment
       # - id: fossa-list-targets
       #   name: Run fossa list-targets
       #   run: |
