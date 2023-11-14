@@ -130,6 +130,9 @@ rules:
           - THIRD_PARTY_NOTICES*
           - THIRD-PARTY-NOTICES*
           - THIRDPARTYNOTICES*
+          - LICENSES/THIRD_PARTY_NOTICES*
+          - LICENSES/THIRD-PARTY-NOTICES*
+          - LICENSES/THIRDPARTYNOTICES*
         nocase: true
     policyInfo: >-
       A [`THIRD_PARTY_NOTICES.md`](https://github.com/newrelic/opensource-website/blob/develop/THIRD_PARTY_NOTICES.md)
