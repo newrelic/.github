@@ -27,11 +27,7 @@ jobs:
           repository: newrelic/newrelic-java-agent
           path: newrelic-java-agent
       - name: Setup java agent environment
-        run: |
-          echo "PWD $(pwd)"
-          echo "ls -a"
-          ls -a
-        # uses: .github/actions/setup-environment
+        uses: ./.github/actions/setup-environment
       # - id: fossa-list-targets
       #   name: Run fossa list-targets
       #   run: |
