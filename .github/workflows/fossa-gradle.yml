@@ -32,7 +32,7 @@ jobs:
             8
       - name: Set gradle.properties
         run: |
-          export GRADLE_PROPERTIES_PATH="./android/gradle.properties"
+          export GRADLE_PROPERTIES_PATH="./gradle.properties"
           echo "jdk8=${JAVA_HOME_8_X64}" >> $GRADLE_PROPERTIES_PATH
           echo "jdk11=${JAVA_HOME_11_X64}" >> $GRADLE_PROPERTIES_PATH
           echo "jdk17=${JAVA_HOME_17_X64}" >> $GRADLE_PROPERTIES_PATH
