@@ -21,6 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
