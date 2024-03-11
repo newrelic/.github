@@ -5,6 +5,8 @@ on:
   pull_request:
     branches: [ $default-branch ]
   workflow_dispatch:
+  schedule:
+    - cron: '30 * * * *'
 
 jobs:
   fossa:
