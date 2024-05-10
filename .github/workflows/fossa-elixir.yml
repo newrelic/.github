@@ -5,8 +5,6 @@ on:
   pull_request:
     branches: [ $default-branch ]
   workflow_dispatch:
-  schedule:
-    - cron: '30 * * * *'
 
 jobs:
   fossa:
@@ -22,6 +20,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+            otp-version: '26'
+            elixir: '1.15'
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
@@ -29,7 +31,7 @@ jobs:
           export LIST_TARGETS_OUT_FILE=${{ runner.temp }}/list-targets_out.txt
           export LIST_TARGETS_ERR_FILE=${{ runner.temp }}/list-targets_err.txt
 
-          fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE || true
+          fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE
 
           if [[ $(grep -i "error" $LIST_TARGETS_ERR_FILE | wc -l) -gt 0 ]]
           then
@@ -59,9 +61,9 @@ jobs:
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'True'}}
         run: |
           export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
-          export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
-          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
-          if [[ $(grep "ERROR" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
+          export ANALZYE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
+          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALZYE_ERR_FILE
+          if [[ $(grep -i "error" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
           then
               echo "::error::fossa analyze ran with errors."
               cat $ANALYZE_ERR_FILE

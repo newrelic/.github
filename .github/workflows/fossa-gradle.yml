@@ -5,6 +5,8 @@ on:
   pull_request:
     branches: [ $default-branch ]
   workflow_dispatch:
+  schedule:
+    - cron: '30 * * * *'
 
 jobs:
   fossa:
@@ -43,7 +45,6 @@ jobs:
           cache-read-only: true
       - name: Setup Gradle options
         run: echo "GRADLE_OPTIONS=--console=plain --parallel -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_11_X64,JAVA_HOME_17_X64,JAVA_HOME_21_X64" >> $GITHUB_ENV
-
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
