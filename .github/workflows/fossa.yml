@@ -80,4 +80,3 @@ jobs:
       - name: Exit
         if: ${{ steps.fossa-list-targets.outputs.HAS_FOSSA_TARGETS == 'Error' || steps.fossa-analyze.outputs.FOSSA_ANALYZE_RESULT == 'Error' }}
         run: exit 1
-
