@@ -23,8 +23,28 @@ jobs:
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
-      - name: Run the specified Setup Build Action
-        uses: ./.github/actions/setup-environment
+      - name: Setup javas
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: |
+            21
+            17
+            11
+            8
+      - name: Set gradle.properties
+        run: |
+          export GRADLE_PROPERTIES_PATH="./gradle.properties"
+          echo "jdk8=${JAVA_HOME_8_X64}" >> $GRADLE_PROPERTIES_PATH
+          echo "jdk11=${JAVA_HOME_11_X64}" >> $GRADLE_PROPERTIES_PATH
+          echo "jdk17=${JAVA_HOME_17_X64}" >> $GRADLE_PROPERTIES_PATH
+          echo "jdk21=${JAVA_HOME_21_X64}" >> $GRADLE_PROPERTIES_PATH
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+      - name: Setup Gradle options
+        run: echo "GRADLE_OPTIONS=--console=plain --parallel -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_11_X64,JAVA_HOME_17_X64,JAVA_HOME_21_X64" >> $GITHUB_ENV
       - id: fossa-list-targets
         name: Run fossa list-targets
         run: |
