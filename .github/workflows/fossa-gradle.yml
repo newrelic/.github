@@ -50,7 +50,7 @@ jobs:
           export LIST_TARGETS_OUT_FILE=${{ runner.temp }}/list-targets_out.txt
           export LIST_TARGETS_ERR_FILE=${{ runner.temp }}/list-targets_err.txt
 
-          fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE
+          fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE || true
 
           if [[ $(grep -i "error" $LIST_TARGETS_ERR_FILE | wc -l) -gt 0 ]]
           then
@@ -81,7 +81,7 @@ jobs:
         run: |
           export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
           export ANALZYE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
-          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALZYE_ERR_FILE
+          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALZYE_ERR_FILE || true
           if [[ $(grep -i "error" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
           then
               echo "::error::fossa analyze ran with errors."
