@@ -27,9 +27,6 @@ jobs:
       REPO: ${{ github.repository }}
       CUSTOM_PROPS_PAT: ${{ secrets.FOSSA_PAT }}
 
-    strategy:
-      fail-fast: false
-
     steps:
       - uses: actions/checkout@v3
       - uses: erlef/setup-beam@v1
