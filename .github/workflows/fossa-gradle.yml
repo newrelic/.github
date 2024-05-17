@@ -7,16 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
+  check_env:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
+    steps:
+      - id: check-fossa-api-key
+        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
+    outputs:
+      HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}
+
   fossa:
+    needs: check_env
+    if: ${{ needs.check_env.HAS_FOSSA_API_KEY }}
     runs-on: ubuntu-latest
     env:
       FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
       ORG: ${{ github.repository_owner }}
       REPO: ${{ github.repository }}
       CUSTOM_PROPS_PAT: ${{ secrets.FOSSA_PAT }}
-
-    strategy:
-      fail-fast: false
 
     steps:
       - name: Checkout this repo
