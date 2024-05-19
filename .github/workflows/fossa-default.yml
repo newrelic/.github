@@ -19,7 +19,7 @@ jobs:
 
   fossa:
     needs: check_env
-    if: ${{ needs.check_env.HAS_FOSSA_API_KEY }}
+    if: ${{ !needs.check_env.HAS_FOSSA_API_KEY }}
     runs-on: ubuntu-latest
     env:
       FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
