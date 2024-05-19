@@ -13,7 +13,7 @@ jobs:
       HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
     steps:
       - id: check-fossa-api-key
-        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
+        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT" && echo $HAS_FOSSA_API_KEY
     outputs:
       HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}
 
