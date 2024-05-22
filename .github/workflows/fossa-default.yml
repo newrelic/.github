@@ -1,10 +1,7 @@
 name: FOSSA CLI Analysis
 on:
-  push:
-    branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
-  workflow_dispatch:
 
 jobs:
   check_env:
@@ -19,7 +16,7 @@ jobs:
 
   fossa:
     needs: check_env
-    if: ${{ needs.check_env.HAS_FOSSA_API_KEY }}
+    if: ${{ needs.check_env.outputs.HAS_FOSSA_API_KEY == 'true' }}
     runs-on: ubuntu-latest
     env:
       FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
@@ -67,7 +64,7 @@ jobs:
         run: |
           export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
           export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
-          fossa analyze --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
+          fossa analyze --team='Service Accounts' --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
           if [[ $(grep "ERROR" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
           then
               echo "::error::fossa analyze ran with errors."
