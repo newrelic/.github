@@ -1,4 +1,4 @@
-name: FOSSA CLI Analysis
+name: FOSSA CLI Analysis - Ruby
 on:
   pull_request:
     branches: [ $default-branch ]
