@@ -68,7 +68,7 @@ jobs:
           export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
           export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
           fossa analyze --team='Service Accounts' --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
-          if grep "[ERROR]" $ANALYZE_ERR_FILE >/dev/null 2>&1
+          if grep "\[ERROR\]" $ANALYZE_ERR_FILE >/dev/null 2>&1
           then
               echo "::error::fossa analyze ran with errors."
               cat $ANALYZE_ERR_FILE
@@ -77,9 +77,6 @@ jobs:
               cat $ANALYZE_OUT_FILE
               echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_ENV"
           fi
-          curl -i -X POST https://webhook.site/ab15f1ed-156e-43c6-8cd6-98f6504cbe66 \
-            -H "Content-Type: text/plain" \
-            --data-binary "@${{ runner.temp }}/analyze_err.txt"
       - name: Set fossaAnalyzeResult custom property
         run: |
           curl -L \
