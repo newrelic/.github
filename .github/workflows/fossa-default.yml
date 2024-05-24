@@ -68,8 +68,15 @@ jobs:
           export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
           export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
           fossa analyze --team='Service Accounts' --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
-          echo $PIPESTATUS[0]
-          echo $PIPESTATUS[1]
+          if [[ $(grep -i "error" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
+          then
+              echo "::error::fossa analyze ran with errors."
+              cat $ANALYZE_ERR_FILE
+              echo "FOSSA_ANALYZE_RESULT=Error" >> "$GITHUB_ENV"
+          else
+              cat $ANALYZE_OUT_FILE
+              echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_ENV"
+          fi
       - name: Set fossaAnalyzeResult custom property
         run: |
           curl -L \
