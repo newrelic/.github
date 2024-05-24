@@ -37,7 +37,7 @@ jobs:
 
           fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE || true
 
-          if [[ $(grep -i "error" $LIST_TARGETS_ERR_FILE | wc -l) -gt 0 ]]
+          if grep "\[ERROR\]" $LIST_TARGETS_ERR_FILE >/dev/null 2>&1
           then
               echo "::error::fossa list-targets ran with errors."
               cat $LIST_TARGETS_ERR_FILE
