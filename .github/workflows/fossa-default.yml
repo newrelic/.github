@@ -2,6 +2,7 @@ name: FOSSA CLI Analysis - Default
 on:
   pull_request:
     branches: [ $default-branch ]
+  workflow_call:
 
 jobs:
   check_env:
