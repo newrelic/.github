@@ -1,0 +1,85 @@
+name: 'FOSSA Composite Action'
+description: 'Shared action for running FOSSA workflows'
+#inputs:
+#  FOSSA_API_KEY:
+#    description: 'API key for pushing results from fossa analyze'
+#    required: false
+#  ORG: 
+#    description: 'github.repository_owner'
+#    required: true
+#  REPO: 
+#    description: 'github.repository'
+#    required: true
+#  CUSTOM_PROPS_PAT:
+#    description: 'PAT for updating custom properties'
+#    required: true
+    
+
+runs:
+  using: 'composite'
+  steps: 
+    - id: fossa-list-targets
+      name: Run fossa list-targets
+      shell: bash
+      run: |
+        curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
+        export LIST_TARGETS_OUT_FILE=${{ runner.temp }}/list-targets_out.txt
+        export LIST_TARGETS_ERR_FILE=${{ runner.temp }}/list-targets_err.txt
+
+        fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE || true
+
+        if grep "\[ERROR\]" $LIST_TARGETS_ERR_FILE >/dev/null 2>&1
+        then
+            echo "::error::fossa list-targets ran with errors."
+            cat $LIST_TARGETS_ERR_FILE
+            echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_ENV"
+        elif [[ $(cat $LIST_TARGETS_OUT_FILE | wc -l) -gt 0 ]]
+        then
+            echo "::notice::Fossa found analysis targets."
+            cat $LIST_TARGETS_OUT_FILE
+            echo "HAS_FOSSA_TARGETS=True" >> "$GITHUB_ENV"
+        else
+            echo "::warning::Fossa did not find any analysis targets."
+            echo "HAS_FOSSA_TARGETS=False" >> "$GITHUB_ENV"
+            echo "FOSSA_ANALYZE_RESULT=N/A" >> "$GITHUB_ENV"
+        fi
+
+    - id: fossa-analyze
+      name: Run fossa analyze
+      shell: bash
+      if: ${{ env.HAS_FOSSA_TARGETS == 'True'}}
+      run: |
+        export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
+        export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
+        fossa analyze --team='Service Accounts' --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
+        if grep "\[ERROR\]" $ANALYZE_ERR_FILE >/dev/null 2>&1
+        then
+            echo "::error::fossa analyze ran with errors."
+            cat $ANALYZE_ERR_FILE
+            echo "FOSSA_ANALYZE_RESULT=Error" >> "$GITHUB_ENV"
+        else
+            cat $ANALYZE_OUT_FILE
+            echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_ENV"
+        fi
+
+    - name: Set custom properties 
+      shell: bash
+      run: |
+        response=$(curl --write-out '%{http_code}' --silent --output /dev/null \
+          -L \
+          -X PATCH \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $CUSTOM_PROPS_PAT" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/orgs/$ORG/properties/values \
+          -d '{"repository_names":["'"${REPO##*/}"'"],"properties":[{"property_name":"fossaHasTargets","value": "'"$HAS_FOSSA_TARGETS"'"}, {"property_name":"fossaAnalyzeResult","value": "'"$FOSSA_ANALYZE_RESULT"'"}]}' \
+        )
+        if [[ $response != 204 ]]
+        then
+            echo "::warning::Writing custom properties failed."
+        fi
+    - name: Exit
+      shell: bash
+      if: ${{ env.HAS_FOSSA_TARGETS == 'Error' || env.FOSSA_ANALYZE_RESULT == 'Error' }}
+      run: |
+        exit 1

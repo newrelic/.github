@@ -4,26 +4,21 @@ on:
     branches: [ $default-branch ]
 
 jobs:
-  check_env:
+  fossa_ruby:
     runs-on: ubuntu-latest
     env:
-      HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
-    steps:
-      - id: check-fossa-api-key
-        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
-    outputs:
-      HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}
+      FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
+      ORG: ${{ github.repository_owner }}
+      REPO: ${{ github.repository }}
+      CUSTOM_PROPS_PAT: ${{ secrets.FOSSA_PAT }}
+      HAS_FOSSA_TARGETS: ""
+      FOSSA_ANALYZE_RESULT: ""
 
-  prep:
-    needs: check_env
-    if: ${{ needs.check_env.outputs.HAS_FOSSA_API_KEY == 'true' }}
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-
-  fossa:
-    uses: newrelic-csec/.github/.github/workflows/fossa-default.yml@reusable
-    needs: prep
+      - id: fossa-cli
+        if: ${{ env.FOSSA_API_KEY != '' }}
+        uses: newrelic-csec/.github/.github/composite/fossa-composite@reusable
