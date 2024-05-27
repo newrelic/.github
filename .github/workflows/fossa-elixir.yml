@@ -26,6 +26,6 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
             otp-version: '26'
-            elixir: '1.15'
+            elixir-version: '1.15'
       - id: fossa-cli
         uses: newrelic-csec/.github/.github/composite/fossa-composite@reusable
