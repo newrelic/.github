@@ -5,14 +5,7 @@ on:
 
 jobs:
   check_env:
-    runs-on: ubuntu-latest
-    env:
-      HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
-    steps:
-      - id: check-fossa-api-key
-        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
-    outputs:
-      HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}
+    uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@reusable
 
   fossa:
     needs: check_env
@@ -51,64 +44,5 @@ jobs:
           cache-read-only: true
       - name: Setup Gradle options
         run: echo "GRADLE_OPTIONS=--console=plain --parallel -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_11_X64,JAVA_HOME_17_X64,JAVA_HOME_21_X64" >> $GITHUB_ENV
-      - id: fossa-list-targets
-        name: Run fossa list-targets
-        run: |
-          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-          export LIST_TARGETS_OUT_FILE=${{ runner.temp }}/list-targets_out.txt
-          export LIST_TARGETS_ERR_FILE=${{ runner.temp }}/list-targets_err.txt
-
-          fossa list-targets --format text 1>$LIST_TARGETS_OUT_FILE 2>$LIST_TARGETS_ERR_FILE || true
-
-          if [[ $(grep -i "error" $LIST_TARGETS_ERR_FILE | wc -l) -gt 0 ]]
-          then
-              echo "::error::fossa list-targets ran with errors."
-              cat $LIST_TARGETS_ERR_FILE
-              echo "HAS_FOSSA_TARGETS=Error" >> "$GITHUB_ENV"
-          elif [[ $(cat $LIST_TARGETS_OUT_FILE | wc -l) -gt 0 ]]
-          then
-              echo "::notice::Fossa found analysis targets."
-              cat $LIST_TARGETS_OUT_FILE
-              echo "HAS_FOSSA_TARGETS=True" >> "$GITHUB_ENV"
-          else
-              echo "::warning::Fossa did not find any analysis targets."
-              echo "HAS_FOSSA_TARGETS=False" >> "$GITHUB_ENV"
-              echo "FOSSA_ANALYZE_RESULT=N/A" >> "$GITHUB_ENV"
-          fi
-      - name: Set fossaHasTargets custom property
-        run: |
-          curl -L \
-            -X PATCH \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $CUSTOM_PROPS_PAT" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/orgs/$ORG/properties/values \
-            -d '{"repository_names":["'"${REPO##*/}"'"],"properties":[{"property_name":"fossaHasTargets","value": "'"$HAS_FOSSA_TARGETS"'"}]}'
-      - id: fossa-analyze
-        name: Run fossa analyze
-        if: ${{ env.HAS_FOSSA_TARGETS == 'True'}}
-        run: |
-          export ANALYZE_OUT_FILE=${{ runner.temp }}/analyze_out.txt
-          export ANALYZE_ERR_FILE=${{ runner.temp }}/analyze_err.txt
-          fossa analyze --team='Service Accounts' --policy='New Relic Public Github' 1>$ANALYZE_OUT_FILE 2>$ANALYZE_ERR_FILE || true
-          if [[ $(grep -i "error" $ANALYZE_ERR_FILE | wc -l) -gt 0 ]]
-          then
-              echo "::error::fossa analyze ran with errors."
-              cat $ANALYZE_ERR_FILE
-              echo "FOSSA_ANALYZE_RESULT=Error" >> "$GITHUB_ENV"
-          else
-              cat $ANALYZE_OUT_FILE
-              echo "FOSSA_ANALYZE_RESULT=Success" >> "$GITHUB_ENV"
-          fi
-      - name: Set fossaAnalyzeResult custom property
-        run: |
-          curl -L \
-            -X PATCH \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $CUSTOM_PROPS_PAT" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/orgs/$ORG/properties/values \
-            -d '{"repository_names":["'"${REPO##*/}"'"],"properties":[{"property_name":"fossaAnalyzeResult","value": "'"$FOSSA_ANALYZE_RESULT"'"}]}'
-      - name: Exit
-        if: ${{ env.HAS_FOSSA_TARGETS == 'Error' || env.FOSSA_ANALYZE_RESULT == 'Error' }}
-        run: exit 1
+      - id: fossa-cli
+        uses: newrelic-csec/.github/.github/composite/fossa-composite@reusable
