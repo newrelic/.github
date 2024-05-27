@@ -14,9 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
-    outputs:
-      HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}
     steps:
       - id: check-fossa-api-key
         run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
-
+    outputs:
+      check: ${{ steps.check-fossa-api-key.outputs.check }}
