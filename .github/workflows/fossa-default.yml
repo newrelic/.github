@@ -2,11 +2,12 @@ name: FOSSA CLI Analysis - Default
 on:
   pull_request:
     branches: [ $default-branch ]
-  workflow_call:
 
 jobs:
   check_env:
     uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@reusable
+    secrets:
+      FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
   fossa:
     needs: check_env

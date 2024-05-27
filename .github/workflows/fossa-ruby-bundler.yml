@@ -6,6 +6,8 @@ on:
 jobs:
   check_env:
     uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@reusable
+    secrets:
+      FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
   fossa_ruby:
     needs: check_env
