@@ -5,7 +5,7 @@ on:
 
 jobs:
   check_env:
-    uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@reusable
+    uses: newrelic/.github/.github/workflows/fossa-check-env.yml@main
     secrets:
       FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
@@ -47,4 +47,4 @@ jobs:
       - name: Setup Gradle options
         run: echo "GRADLE_OPTIONS=--console=plain --parallel -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_8_X64,JAVA_HOME_11_X64,JAVA_HOME_17_X64,JAVA_HOME_21_X64" >> $GITHUB_ENV
       - id: fossa-cli
-        uses: newrelic-csec/.github/.github/composite/fossa-composite@reusable
+        uses: newrelic/.github/.github/composite/fossa-composite@main
