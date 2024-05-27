@@ -1,20 +1,5 @@
 name: 'FOSSA Composite Action'
 description: 'Shared action for running FOSSA workflows'
-#inputs:
-#  FOSSA_API_KEY:
-#    description: 'API key for pushing results from fossa analyze'
-#    required: false
-#  ORG: 
-#    description: 'github.repository_owner'
-#    required: true
-#  REPO: 
-#    description: 'github.repository'
-#    required: true
-#  CUSTOM_PROPS_PAT:
-#    description: 'PAT for updating custom properties'
-#    required: true
-    
-
 runs:
   using: 'composite'
   steps: 
