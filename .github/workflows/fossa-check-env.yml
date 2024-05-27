@@ -1,0 +1,17 @@
+name: FOSSA Check Env
+on:
+  workflow_call:
+    secrets:
+      FOSSA_API_KEY:
+       required: false
+
+jobs:
+  check_env:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY != '' }}
+    steps:
+      - id: check-fossa-api-key
+        run: echo "check=$HAS_FOSSA_API_KEY" >> "$GITHUB_OUTPUT"
+    outputs:
+      HAS_FOSSA_API_KEY: ${{ steps.check-fossa-api-key.outputs.check }}

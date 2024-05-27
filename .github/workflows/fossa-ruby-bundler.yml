@@ -4,7 +4,12 @@ on:
     branches: [ $default-branch ]
 
 jobs:
+  check_env:
+    uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@reusable
+
   fossa_ruby:
+    needs: check_env
+    if: ${{ needs.check_env.outputs.HAS_FOSSA_API_KEY == 'true' }}
     runs-on: ubuntu-latest
     env:
       FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
@@ -20,5 +25,4 @@ jobs:
         with:
           ruby-version: '3.2'
       - id: fossa-cli
-        if: ${{ env.FOSSA_API_KEY != '' }}
         uses: newrelic-csec/.github/.github/composite/fossa-composite@reusable
