@@ -22,9 +22,22 @@ jobs:
       FOSSA_ANALYZE_RESULT: ""
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3'
+      - name: Ensure that a Gemfile.lock file exists for each Gemfile file
+        run: |
+          echo "Ensuring that Gemfile.lock files exist..."
+          for gemfile in $(find . -name Gemfile -not -path './test/**' -not -path './spec/**'); do
+            dir=${gemfile%/*}
+            echo "Found Gemfile at $dir"
+            if [[ -e "$dir/Gemfile.lock" ]]; then
+              echo "Found Gemfile.lock at $dir"
+            else
+              echo "No Gemfile.lock found at $dir - generating one..."
+              bundle lock --gemfile "$dir/Gemfile"
+            fi
+          done
       - id: fossa-cli
         uses: newrelic/.github/.github/composite/fossa-composite@main
