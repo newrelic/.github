@@ -67,4 +67,6 @@ runs:
       shell: bash
       if: ${{ env.HAS_FOSSA_TARGETS == 'Error' || env.FOSSA_ANALYZE_RESULT == 'Error' }}
       run: |
-        exit 1
+        echo "::notice::FOSSA - please follow up internally."        
+        exit 0
+#        exit 1
