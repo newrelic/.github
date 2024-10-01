@@ -70,23 +70,6 @@ rules:
       and this rule is failing, your header may be out of date, and you should
       update your header with the suggested one below
     policyUrl: https://opensource.newrelic.com/oss-category/
-  readme-contains-link-to-security-policy:
-    level: error
-    rule:
-      type: file-contents
-      options:
-        globsAll:
-          - README*
-        fail-on-non-existent: true
-        flags: i
-        content: (?:(?:https:\/\/github\.com\/newrelic\/[^\/]+)|(?:\.\.\/\.\.))\/security\/policy
-        human-readable-content: a link to the security policy for this repository
-    policyInfo: >-
-      New Relic recommends putting a link to the open source security policy for your project
-      (`https://github.com/newrelic/<repo-name>/security/policy` or `../../security/policy`)
-      in the README. For an example of this, please see the "a note about vulnerabilities"
-      section of the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)
-    policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
   readme-contains-forum-topic:
     level: error
     rule:
