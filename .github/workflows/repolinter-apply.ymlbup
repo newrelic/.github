@@ -34,7 +34,7 @@ jobs:
           token: ${{ secrets.REPOLINTER_TOKEN }}
       
       - name: Run Repolinter
-        uses: newrelic-csec/repolinter-action@v1
+        uses: newrelic/repolinter-action@v1
         with:
           directory: ${{ github.workspace }}/apply
           config_file: ${{ github.workspace }}/repo/${{ matrix.config }}

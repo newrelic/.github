@@ -22,7 +22,7 @@ jobs:
       - name: Run Repolinter Action
         id: repolinter
         continue-on-error: true
-        uses: newrelic-csec/repolinter-action@v1
+        uses: newrelic/repolinter-action@v1
         with:
           config_file: ${{ matrix.config }}
 

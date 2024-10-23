@@ -5,7 +5,7 @@ on:
 
 jobs:
   check_env:
-    uses: newrelic/.github/.github/workflows/fossa-check-env.yml@main
+    uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@main
     secrets:
       FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
@@ -28,4 +28,4 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.CAOS_RUST_CRATE_FOSSA }}
       - id: fossa-cli
-        uses: newrelic/.github/.github/composite/fossa-composite@main
+        uses: newrelic-csec/.github/.github/composite/fossa-composite@main

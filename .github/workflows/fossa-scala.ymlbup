@@ -1,11 +1,11 @@
-name: FOSSA CLI Analysis - Default
+name: FOSSA CLI Analysis - Scala
 on:
   pull_request:
     branches: [ $default-branch ]
 
 jobs:
   check_env:
-    uses: newrelic-csec/.github/.github/workflows/fossa-check-env.yml@main
+    uses: newrelic/.github/.github/workflows/fossa-check-env.yml@main
     secrets:
       FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
@@ -23,5 +23,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Download newrelic.jar
+        if: ${{ github.repository == 'newrelic/newrelic-java-examples' }}
+        run: |
+          mkdir newrelic-java-agent/scala/segment-api-synchronous/libs
+          curl https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.jar --output newrelic-java-agent/scala/segment-api-synchronous/libs/newrelic.jar
       - id: fossa-cli
-        uses: newrelic-csec/.github/.github/composite/fossa-composite@main
+        uses: newrelic/.github/.github/composite/fossa-composite@main
