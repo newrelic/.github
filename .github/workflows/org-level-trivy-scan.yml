@@ -20,6 +20,7 @@ jobs:
       contents: read
       packages: read
       security-events: write
+      actions: read
 
     env:
       SLACK_WEBHOOK_URL_SET: ${{ secrets.TEAM_SLACK_WEBHOOK_URL != '' }}
@@ -45,7 +46,7 @@ jobs:
           format: 'table'
           exit-code: '0'
 
-      - name: Run Trivy for console output (All Vulnerabilities) unfixed
+      - name: Run Trivy for console output (Fixed Vulnerabilities)
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ inputs.image-name }}
@@ -68,7 +69,6 @@ jobs:
           exit-code: '1'
         continue-on-error: true
 
-      # Check if the SARIF file has content 
       - name: Check if SARIF report has content
         id: check_sarif
         run: |
@@ -79,11 +79,10 @@ jobs:
           else
             echo "sarif_has_content=false" >> $GITHUB_OUTPUT
           fi
-        if: always() # Ensure this check runs even if the previous step failed
+        if: always()
 
       # Upload on condition
       - name: Upload Trivy SARIF report to GitHub Security
-        # checks the output if ignore-unfixed is true throws an output
         if: steps.check_sarif.outputs.sarif_has_content == 'true'
         uses: github/codeql-action/upload-sarif@v3
         with:
