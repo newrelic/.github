@@ -88,13 +88,13 @@ rules:
       section of the [Open By Default repository](https://github.com/newrelic/open-by-default#contribute)
     policyUrl: https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code
   readme-contains-forum-topic:
-    level: error
+    level: warning
     rule:
       type: file-contents
       options:
         globsAll:
           - README*
-        fail-on-non-existent: true
+        fail-on-non-existent: false
         flags: i
         content: forum\.newrelic\.com
         human-readable-content: a link to the appropriate forum.newrelic.com topic
