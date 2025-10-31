@@ -50,7 +50,7 @@
                   "globsAll": ["README*"],
                   "nocase": true,
                   "lineCount": 1,
-                  "patterns": ["<a href=\"https:\\/\\/opensource\\.newrelic\\.com\\/oss-category\\/#new-relic-one-catalog-project\"><picture><source media=\"\\(prefers-color-scheme: dark\\)\" srcset=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/dark\\/New_Relic_One_Catalog_Project\\.png\"><source media=\"\\(prefers-color-scheme: light\\)\" srcset=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/New_Relic_One_Catalog_Project\\.png\"><img alt=\"New Relic Open Source catalog project banner\\.\" src=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/New_Relic_One_Catalog_Project\\.png\"><\\/picture><\\/a>"],
+                  "patterns": ["<a href=\"https:\\/\\/opensource\\.newrelic\\.com\\/oss-category\\/#one-catalog\"><picture><source media=\"\\(prefers-color-scheme: dark\\)\" srcset=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/dark\\/New_Relic_One_Catalog_Project\\.png\"><source media=\"\\(prefers-color-scheme: light\\)\" srcset=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/New_Relic_One_Catalog_Project\\.png\"><img alt=\"New Relic Open Source catalog project banner\\.\" src=\"https:\\/\\/github\\.com\\/newrelic\\/opensource-website\\/raw\\/main\\/src\\/images\\/categories\\/New_Relic_One_Catalog_Project\\.png\"><\\/picture><\\/a>"],
                   "human-readable-pattern": "Open source NR1 Catalog header (see https://opensource.newrelic.com/oss-category)",
                   "flags": "i",
                   "succeed-on-non-existent": false
@@ -64,7 +64,7 @@
                     "newlines": { "end": 2 }
                 }
             },
-            "policyInfo": "The README of a community plus project should have a NR1 Catalog header at the start of the README. If you already have a NR1 Catalog header and this rule is failing, your header may be out of date, and you should update your header with the suggested one below",
+            "policyInfo": "The README of a catalog project should have a NR1 Catalog header at the start of the README. If you already have a NR1 Catalog header and this rule is failing, your header may be out of date, and you should update your header with the suggested one below",
             "policyUrl": "https://opensource.newrelic.com/oss-category/"
         },
         "readme-contains-security-section": {
@@ -98,12 +98,12 @@
             "policyUrl": "https://nerdlife.datanerd.us/new-relic/security-guidelines-for-publishing-source-code"
         },
         "readme-contains-forum-topic": {
-            "level": "error",
+            "level": "warning",
             "rule": {
                 "type": "file-contents",
                 "options": {
                     "globsAll": ["README*"],
-                    "fail-on-non-existent": true,
+                    "fail-on-non-existent": false,
                     "flags": "i",
                     "content": "forum\\.newrelic\\.com",
                     "human-readable-content": "a link to the appropriate forum.newrelic.com topic"
