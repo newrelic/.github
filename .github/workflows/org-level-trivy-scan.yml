@@ -20,7 +20,6 @@ jobs:
       contents: read
       packages: read
       security-events: write
-      actions: read
 
     env:
       SLACK_WEBHOOK_URL_SET: ${{ secrets.TEAM_SLACK_WEBHOOK_URL != '' }}

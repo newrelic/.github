@@ -1,0 +1,140 @@
+name: Ban user on /ban comment (org required workflow)
+
+# Org-wide version of ban-user.yml, intended to run as a GitHub
+# "required workflow" so every repo in the org gets /ban without each
+# repo having to copy the file.
+#
+# Setup (org owner):
+#   1. Put this file in a repo in the org (e.g. <org>/.github-private or any
+#      repo allowed to host required workflows).
+#   2. Settings → Actions → General → Required workflows → add this file and
+#      target the repos it should apply to (typically: all repos).
+#   3. Register the GitHub App once at the org level and store the secrets as
+#      organization secrets (Settings → Secrets and variables → Actions →
+#      Organization secrets), scoped to the repos the required workflow runs in:
+#        BAN_APP_ID           — app id of a GitHub App installed on the org
+#        BAN_APP_PRIVATE_KEY  — PEM private key for that App
+#
+# App permissions:
+#   Organization: Administration (read & write)  — to block users
+#   Repository:   Metadata (read), Pull requests (read), Issues (write)
+#
+# The App must be installed on the org and granted access to every repo the
+# required workflow targets. The /ban command itself is gated on the
+# commenter having admin permission on the specific repo where the comment
+# was posted, so org-wide deployment does not widen who can ban.
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  ban:
+    if: >
+      github.event.issue.pull_request != null &&
+      startsWith(github.event.comment.body, '/ban')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate /ban command
+        id: validate
+        env:
+          BODY: ${{ github.event.comment.body }}
+        run: |
+          set -euo pipefail
+          first_line=$(printf '%s' "${BODY}" | head -n1)
+          if printf '%s' "${first_line}" | grep -Eq '^/ban(\s|$)'; then
+            echo "match=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Comment starts with /ban prefix but is not the /ban command; skipping."
+            echo "match=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check commenter has admin permission on the repo
+        if: steps.validate.outputs.match == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMENTER: ${{ github.event.comment.user.login }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          permission=$(gh api "repos/${REPO}/collaborators/${COMMENTER}/permission" --jq '.permission')
+          echo "Commenter ${COMMENTER} has permission: ${permission}"
+          if [[ "${permission}" != "admin" ]]; then
+            echo "::error::/ban requires admin permission on the repo; ${COMMENTER} has '${permission}'."
+            exit 1
+          fi
+
+      - name: Mint GitHub App token
+        if: steps.validate.outputs.match == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.BAN_APP_ID }}
+          private-key: ${{ secrets.BAN_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Block PR author from the org
+        if: steps.validate.outputs.match == 'true'
+        id: block
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          ORG: ${{ github.repository_owner }}
+          TARGET: ${{ github.event.issue.user.login }}
+          ACTOR: ${{ github.event.comment.user.login }}
+        run: |
+          set -euo pipefail
+
+          if [[ "${TARGET}" == "${ACTOR}" ]]; then
+            echo "::error::Refusing to self-ban (${ACTOR})."
+            exit 1
+          fi
+
+          target_role=$(gh api "orgs/${ORG}/memberships/${TARGET}" --jq '.role' 2>/dev/null || echo "not_a_member")
+          if [[ "${target_role}" == "admin" ]]; then
+            echo "::error::Refusing to ban ${TARGET}: they are an org admin."
+            exit 1
+          fi
+
+          echo "Blocking ${TARGET} from ${ORG} (requested by ${ACTOR})..."
+          gh api --method PUT "orgs/${ORG}/blocks/${TARGET}"
+          echo "Blocked ${TARGET}."
+
+      - name: React to the /ban comment
+        if: always() && steps.validate.outputs.match == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+        run: |
+          set -euo pipefail
+          reaction='-1'
+          if [[ "${{ steps.block.outcome }}" == "success" ]]; then
+            reaction='+1'
+          fi
+          gh api --method POST \
+            "repos/${REPO}/issues/comments/${COMMENT_ID}/reactions" \
+            -f "content=${reaction}" >/dev/null
+
+      - name: Post outcome comment on the PR
+        if: always() && steps.validate.outputs.match == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.issue.number }}
+          TARGET: ${{ github.event.issue.user.login }}
+          ACTOR: ${{ github.event.comment.user.login }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.block.outcome }}" == "success" ]]; then
+            body=":no_entry: @${TARGET} has been blocked from the ${{ github.repository_owner }} org by @${ACTOR}."
+          else
+            body=":warning: \`/ban\` invoked by @${ACTOR} did not complete. See [workflow run](${RUN_URL})."
+          fi
+          gh api --method POST \
+            "repos/${REPO}/issues/${PR}/comments" \
+            -f "body=${body}" >/dev/null
