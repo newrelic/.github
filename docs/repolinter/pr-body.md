@@ -1,4 +1,4 @@
-Hello from the Open Source and Developer Advocacy team at New Relic! This PR contains a GitHub actions workflow which runs [Repolinter](https://github.com/todogroup/repolinter), an automated tool to help us find and fix inconsistencies in our community files and public repositories. This PR registers a GitHub Actions workflow (`repolinter.yml`) running [repolinter-action](https://github.com/newrelic/repolinter-action). The goal of this workflow is to make our Open Source Policy enforcement more consistent and transparent for everyone.
+Hello from the Open Source and Developer Advocacy team at New Relic! This PR contains a GitHub Actions workflow which runs [Repolinter](https://github.com/todogroup/repolinter), an automated tool to help us find and fix inconsistencies in our community files and public repositories. This PR registers a GitHub Actions workflow (`repolinter.yml`) running [repolinter-action](https://github.com/newrelic/repolinter-action). The goal of this workflow is to make our Open Source Policy enforcement more consistent and transparent for everyone.
 
 Repolinter Action does:
  * Scans the repository for Open Source policy issues using Repolinter. 
@@ -7,7 +7,7 @@ Repolinter Action does:
  * If any policy issues are found, this workflow will open a GitHub issue titled "Open Source Policy Issues" and with the `repolinter` label. This issue will contain detailed information on which policies generated errors and what changes are suggested. An example issue is [here](https://github.com/aperture-science-incorporated/companion-cube/issues/44).
   * As policy issues are resolved, this workflow will update the open issue to reflect the changes. If all policy issues are resolved, the issue will automatically be closed.
 
-This workflow is designed to cause the least amount of friction as possible:
+This workflow is designed to cause as little friction as possible:
  * This workflow will only run on push, and as a result will not participate in status checks for PRs. Furthermore, this workflow will always exit with a passing status unless a fatal internal error occurs.
  * It is up to your team to backlog the items found by this tool appropriately. 
  * This workflow will only notify you when an issue is created. In other words, you will only be notified when new problems occur, but not when existing problems change.
